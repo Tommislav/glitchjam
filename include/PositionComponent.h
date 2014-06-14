@@ -10,10 +10,6 @@ class PositionComponent : public artemis::Component
 		PositionComponent(float posX, float posY);
 		float posX;
 		float posY;
-		void drawSomething();
-		virtual ~PositionComponent();
-	protected:
-	private:
 };
 
 #endif // POSITIONCOMPONENT_H
