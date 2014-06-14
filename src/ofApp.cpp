@@ -4,6 +4,7 @@
 #include "EntityManager.h"
 #include "Entity.h"
 #include "PositionComponent.h"
+#include "PlayerInputComponent.h"
 
 #define KEYCODE_UP 357
 #define KEYCODE_DOWN 359
@@ -14,13 +15,17 @@ float playerX = 0;
 float playerY = 0;
 
 // Use bitmask to determine which keys are being pressed and released
+/*
 int movementBitMask 	= 0;
 const int MOVE_UP 		= 1 << 1;
 const int MOVE_DOWN 	= 1 << 2;
 const int MOVE_LEFT 	= 1 << 3;
 const int MOVE_RIGHT 	= 1 << 4;
-
+*/
 artemis::World _world;
+PositionComponent test = PositionComponent(0, 50);
+PlayerInputComponent playerInput;
+
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -42,16 +47,17 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	if (movementBitMask & MOVE_LEFT) {
+	if (playerInput.left()) {
 		playerX -= 1;
 	}
-	if (movementBitMask & MOVE_RIGHT) {
+	if (playerInput.right()) {
 		playerX += 1;
 	}
-	if (movementBitMask & MOVE_UP) {
+
+	if (playerInput.up()) {
 		playerY -= 1;
 	}
-	if (movementBitMask & MOVE_DOWN) {
+	if (playerInput.down()) {
 		playerY += 1;
 	}
 }
@@ -60,22 +66,25 @@ void ofApp::update(){
 void ofApp::draw(){
 	ofSetColor(0, 255, 0);
 	ofRect(playerX, playerY, 10, 15);
+
+	test.drawSomething();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	if (key == KEYCODE_UP) {		movementBitMask |= MOVE_UP;		}
-	if (key == KEYCODE_DOWN) {		movementBitMask |= MOVE_DOWN;	}
-	if (key == KEYCODE_LEFT) {		movementBitMask |= MOVE_LEFT;	}
-	if (key == KEYCODE_RIGHT) {		movementBitMask |= MOVE_RIGHT;	}
+	if (key == KEYCODE_UP) {		playerInput.movementBitMask |= PlayerInputComponent::MOVE_UP;		}
+	if (key == KEYCODE_DOWN) {		playerInput.movementBitMask |= PlayerInputComponent::MOVE_DOWN;	}
+	if (key == KEYCODE_LEFT) {		playerInput.movementBitMask |= PlayerInputComponent::MOVE_LEFT;	}
+	if (key == KEYCODE_RIGHT) {		playerInput.movementBitMask |= PlayerInputComponent::MOVE_RIGHT;	}
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-	if (key == KEYCODE_UP) {		movementBitMask &= ~MOVE_UP;	}
-	if (key == KEYCODE_DOWN) {		movementBitMask &= ~MOVE_DOWN;	}
-	if (key == KEYCODE_LEFT) {		movementBitMask &= ~MOVE_LEFT;	}
-	if (key == KEYCODE_RIGHT) {		movementBitMask &= ~MOVE_RIGHT;	}
+
+	if (key == KEYCODE_UP) {		playerInput.movementBitMask &= ~PlayerInputComponent::MOVE_UP;	}
+	if (key == KEYCODE_DOWN) {		playerInput.movementBitMask &= ~PlayerInputComponent::MOVE_DOWN;	}
+	if (key == KEYCODE_LEFT) {		playerInput.movementBitMask &= ~PlayerInputComponent::MOVE_LEFT;	}
+	if (key == KEYCODE_RIGHT) {		playerInput.movementBitMask &= ~PlayerInputComponent::MOVE_RIGHT;	}
 }
 
 //--------------------------------------------------------------
