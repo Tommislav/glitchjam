@@ -30,7 +30,11 @@
 		<Unit filename="config.make">
 			<Option virtualFolder="build config" />
 		</Unit>
+		<Unit filename="include/PlayerInputComponent.h" />
 		<Unit filename="include/PositionComponent.h" />
+		<Unit filename="include/RectangleComponent.h" />
+		<Unit filename="include/RenderRectanglesSystem.h" />
+		<Unit filename="include/VelocityComponent.h" />
 		<Unit filename="src/Artemis/Artemis.h" />
 		<Unit filename="src/Artemis/BitSize.h" />
 		<Unit filename="src/Artemis/Component.cpp" />
@@ -64,7 +68,11 @@
 		<Unit filename="src/Artemis/TypeInfoComparator.h" />
 		<Unit filename="src/Artemis/World.cpp" />
 		<Unit filename="src/Artemis/World.h" />
+		<Unit filename="src/PlayerInputComponent.cpp" />
 		<Unit filename="src/PositionComponent.cpp" />
+		<Unit filename="src/RectangleComponent.cpp" />
+		<Unit filename="src/RenderRectanglesSystem.cpp" />
+		<Unit filename="src/VelocityComponent.cpp" />
 		<Unit filename="src/main.cpp">
 			<Option virtualFolder="src/" />
 		</Unit>
