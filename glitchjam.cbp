@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="glitchjam" />
+		<Option makefile_is_custom="1" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Option virtualFolders="addons/;src/;build config/;" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/$(PROJECT_NAME)_debug" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin" />
+				<Option object_output="obj/Debug/" />
+				<Option external_deps="../../../libs/openFrameworksCompiled/lib/linux64/libopenFrameworksDebug.a;" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+			</Target>
+			<Target title="Release">
+				<Option output="bin/$(PROJECT_NAME)" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin" />
+				<Option object_output="obj/Release/" />
+				<Option external_deps="../../../libs/openFrameworksCompiled/lib/linux64/libopenFrameworks.a;" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+			</Target>
+		</Build>
+		<Unit filename="config.make">
+			<Option virtualFolder="build config" />
+		</Unit>
+		<Unit filename="include/PositionComponent.h" />
+		<Unit filename="src/Artemis/Artemis.h" />
+		<Unit filename="src/Artemis/BitSize.h" />
+		<Unit filename="src/Artemis/Component.cpp" />
+		<Unit filename="src/Artemis/Component.h" />
+		<Unit filename="src/Artemis/ComponentMapper.h" />
+		<Unit filename="src/Artemis/ComponentType.cpp" />
+		<Unit filename="src/Artemis/ComponentType.h" />
+		<Unit filename="src/Artemis/ComponentTypeManager.cpp" />
+		<Unit filename="src/Artemis/ComponentTypeManager.h" />
+		<Unit filename="src/Artemis/DelayedEntityProcessingSystem.cpp" />
+		<Unit filename="src/Artemis/DelayedEntityProcessingSystem.h" />
+		<Unit filename="src/Artemis/DelayedEntitySystem.cpp" />
+		<Unit filename="src/Artemis/DelayedEntitySystem.h" />
+		<Unit filename="src/Artemis/Entity.cpp" />
+		<Unit filename="src/Artemis/Entity.h" />
+		<Unit filename="src/Artemis/EntityManager.cpp" />
+		<Unit filename="src/Artemis/EntityManager.h" />
+		<Unit filename="src/Artemis/EntityProcessingSystem.cpp" />
+		<Unit filename="src/Artemis/EntityProcessingSystem.h" />
+		<Unit filename="src/Artemis/EntitySystem.cpp" />
+		<Unit filename="src/Artemis/EntitySystem.h" />
+		<Unit filename="src/Artemis/GroupManager.cpp" />
+		<Unit filename="src/Artemis/GroupManager.h" />
+		<Unit filename="src/Artemis/ImmutableBag.h" />
+		<Unit filename="src/Artemis/SystemBitManager.cpp" />
+		<Unit filename="src/Artemis/SystemBitManager.h" />
+		<Unit filename="src/Artemis/SystemManager.cpp" />
+		<Unit filename="src/Artemis/SystemManager.h" />
+		<Unit filename="src/Artemis/TagManager.cpp" />
+		<Unit filename="src/Artemis/TagManager.h" />
+		<Unit filename="src/Artemis/TypeInfoComparator.h" />
+		<Unit filename="src/Artemis/World.cpp" />
+		<Unit filename="src/Artemis/World.h" />
+		<Unit filename="src/PositionComponent.cpp" />
+		<Unit filename="src/main.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/ofApp.cpp">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Unit filename="src/ofApp.h">
+			<Option virtualFolder="src/" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
