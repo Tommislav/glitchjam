@@ -1,6 +1,6 @@
 obj
 bin
-glitchjam.layout
+*.layout
 glitchjam.workspace
 *cbTemp
 

@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "ofApp.h"
 #include "ofMath.h"
 #include "World.h"
@@ -8,6 +10,8 @@
 #include "PlayerInputComponent.h"
 #include "RectangleComponent.h"
 #include "RenderRectanglesSystem.h"
+#include "MovePlayerSystem.h"
+#include "InputControllableComponent.h"
 #include "Artemis/EntityProcessingSystem.h"
 
 #define KEYCODE_UP 357
@@ -19,8 +23,9 @@ float playerX = 0;
 float playerY = 0;
 
 artemis::World _world;
-PlayerInputComponent playerInput;
 artemis::EntitySystem *_renderSystem;
+
+int *inputBitMask;
 
 
 
@@ -31,22 +36,39 @@ void ofApp::setup(){
 	ofSetFrameRate(60);
 
 	artemis::SystemManager *sm = _world.getSystemManager();
-	_renderSystem = sm->setSystem(new RenderRectanglesSystem());
-    //MovementSystem * movementsys = (MovementSystem*)sm->setSystem(new MovementSystem());
+
+
+	//std::cout << "player input in ofApp: " << playerInput << ", addr: " << std::endl;
+	PlayerInputComponent *input = new PlayerInputComponent();
+	inputBitMask = &(input->movementBitMask);
+
+	sm->setSystem(new MovePlayerSystem(*input), true);
+
+	_renderSystem = sm->setSystem(new RenderRectanglesSystem(), false);
 
     artemis::EntityManager *em = _world.getEntityManager();
+
 
 	for (int i = 0; i < 1000; i ++) {
 		artemis::Entity &enemy = em->create();
 		enemy.addComponent(new PositionComponent(ofRandom(0,1024), ofRandom(0,768)));
 		enemy.addComponent(new RectangleComponent(0,0,10,10, 0xff0000));
+		enemy.addComponent(new VelocityComponent());
+
+		if (ofRandom(0,1) < 0.01) {
+			enemy.addComponent(new InputControllableComponent());
+		}
+
 		enemy.refresh();
 	}
 
 
     artemis::Entity &m_player = em->create();
+    m_player.setTag("player");
     m_player.addComponent(new PositionComponent(50,50));
     m_player.addComponent(new RectangleComponent(0,0,10,15, 0x00ff00));
+    m_player.addComponent(new VelocityComponent());
+    m_player.addComponent(new InputControllableComponent());
     m_player.refresh();
 
 
@@ -60,20 +82,7 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
-	if (playerInput.left()) {
-		playerX -= 1;
-	}
-	if (playerInput.right()) {
-		playerX += 1;
-	}
-
-	if (playerInput.up()) {
-		playerY -= 1;
-	}
-	if (playerInput.down()) {
-		playerY += 1;
-	}
+	_world.process();
 }
 
 //--------------------------------------------------------------
@@ -82,23 +91,27 @@ void ofApp::draw(){
 	//ofRect(playerX, playerY, 10, 15);
 
 	_renderSystem->process();
+	ofDrawBitmapString(ofToString(ofGetFrameRate())+"fps", 10, 15);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	if (key == KEYCODE_UP) 		{		playerInput.movementBitMask |= PlayerInputComponent::MOVE_UP;		}
-	if (key == KEYCODE_DOWN) 	{		playerInput.movementBitMask |= PlayerInputComponent::MOVE_DOWN;		}
-	if (key == KEYCODE_LEFT) 	{		playerInput.movementBitMask |= PlayerInputComponent::MOVE_LEFT;		}
-	if (key == KEYCODE_RIGHT) 	{		playerInput.movementBitMask |= PlayerInputComponent::MOVE_RIGHT;	}
+
+	if (key == KEYCODE_UP) 		{		*inputBitMask |= PlayerInputComponent::MOVE_UP;		}
+	if (key == KEYCODE_DOWN) 	{		*inputBitMask |= PlayerInputComponent::MOVE_DOWN;		}
+	if (key == KEYCODE_LEFT) 	{		*inputBitMask |= PlayerInputComponent::MOVE_LEFT;		}
+	if (key == KEYCODE_RIGHT) 	{		*inputBitMask |= PlayerInputComponent::MOVE_RIGHT;	}
+
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
 
-	if (key == KEYCODE_UP) {		playerInput.movementBitMask &= ~PlayerInputComponent::MOVE_UP;	}
-	if (key == KEYCODE_DOWN) {		playerInput.movementBitMask &= ~PlayerInputComponent::MOVE_DOWN;	}
-	if (key == KEYCODE_LEFT) {		playerInput.movementBitMask &= ~PlayerInputComponent::MOVE_LEFT;	}
-	if (key == KEYCODE_RIGHT) {		playerInput.movementBitMask &= ~PlayerInputComponent::MOVE_RIGHT;	}
+	if (key == KEYCODE_UP) 		{		*inputBitMask &= ~PlayerInputComponent::MOVE_UP;		}
+	if (key == KEYCODE_DOWN) 	{		*inputBitMask &= ~PlayerInputComponent::MOVE_DOWN;	}
+	if (key == KEYCODE_LEFT) 	{		*inputBitMask &= ~PlayerInputComponent::MOVE_LEFT;	}
+	if (key == KEYCODE_RIGHT) 	{		*inputBitMask &= ~PlayerInputComponent::MOVE_RIGHT;	}
+
 }
 
 //--------------------------------------------------------------

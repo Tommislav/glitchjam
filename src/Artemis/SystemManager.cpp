@@ -4,26 +4,31 @@
 #include "Artemis/SystemBitManager.h"
 
 namespace artemis {
-	
+
   SystemManager::SystemManager(World& world) {
     this->world = &world;
   }
-  
+
   Bag<EntitySystem*> & SystemManager::getSystems() {
     return bagged;
   }
-  
+
   void SystemManager::initializeAll() {
     for(int i=0; i< bagged.getCount(); i++) {
       bagged.get(i)->initialize();
     }
-    
   }
-  
-  EntitySystem* SystemManager::setSystem(EntitySystem* stm) {
+
+  void SystemManager::processAll() {
+	for(int i=0; i< autoProcessBag.getCount(); i++) {
+      autoProcessBag.get(i)->process();
+    }
+  }
+
+  EntitySystem* SystemManager::setSystem(EntitySystem* stm, bool autoProcess=true) {
     bool bitFlag = false;
     int index = 0;
-    
+
     //Check if system is known.
     for(int i=0; i< bagged.getCount(); i++)
     {
@@ -32,7 +37,7 @@ namespace artemis {
         index = i;
       }
     }
-    
+
     //Check if stm pointer doesn't point to an existing system
     //Else add system to manager
     if(bagged.get(index) != stm){
@@ -51,13 +56,18 @@ namespace artemis {
         stm->setSystemBit(SystemBitManager::getBitFor(typeid(*stm)));
       }
     }
-    
+
+    if (autoProcess) {
+		autoProcessBag.add(stm);
+    }
+
     return stm;
   }
-  
+
   SystemManager::~SystemManager(){
     systems.clear();
     bagged.deleteData();
+    autoProcessBag.deleteData();
     bagged.clear();
   }
 };

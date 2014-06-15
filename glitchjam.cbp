@@ -30,6 +30,7 @@
 		<Unit filename="config.make">
 			<Option virtualFolder="build config" />
 		</Unit>
+		<Unit filename="include/MovePlayerSystem.h" />
 		<Unit filename="include/PlayerInputComponent.h" />
 		<Unit filename="include/PositionComponent.h" />
 		<Unit filename="include/RectangleComponent.h" />
@@ -68,6 +69,7 @@
 		<Unit filename="src/Artemis/TypeInfoComparator.h" />
 		<Unit filename="src/Artemis/World.cpp" />
 		<Unit filename="src/Artemis/World.h" />
+		<Unit filename="src/MovePlayerSystem.cpp" />
 		<Unit filename="src/PlayerInputComponent.cpp" />
 		<Unit filename="src/PositionComponent.cpp" />
 		<Unit filename="src/RectangleComponent.cpp" />

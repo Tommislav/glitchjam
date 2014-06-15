@@ -10,8 +10,8 @@ namespace artemis {
 	class Entity;
 	class EntityManager;
 	class SystemManager;
-  
-  
+
+
   /**
    * The primary instance for the framework. It contains all the managers.
    *
@@ -34,9 +34,10 @@ namespace artemis {
     Entity& createEntity();
     Entity& getEntity(int entityId);
     void loopStart();
-    
-    
-    
+    void process();
+
+
+
   private:
     SystemManager * systemManager;
     EntityManager * entityManager;
