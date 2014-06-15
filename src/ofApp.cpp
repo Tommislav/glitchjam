@@ -33,8 +33,11 @@ int *inputBitMask;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+	ofBackground(0,0,0);
     ofSetWindowTitle("Glitch Jam 2014");
 	ofSetFrameRate(60);
+
+
 
 	artemis::SystemManager *sm = _world.getSystemManager();
 
