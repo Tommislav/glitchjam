@@ -22,6 +22,8 @@ class MovePlayerSystem : public artemis::EntityProcessingSystem
 		artemis::ComponentMapper<InputControllableComponent> inputMarkerMapper;
 
 		PlayerInputComponent &input;
+		bool vert;
+		bool horis;
 };
 
 #endif // MOVEPLAYERSYSTEM_H

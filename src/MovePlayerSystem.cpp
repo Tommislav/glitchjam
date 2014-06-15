@@ -10,14 +10,27 @@ MovePlayerSystem::MovePlayerSystem(PlayerInputComponent &input):input(input)
 MovePlayerSystem::~MovePlayerSystem() {}
 
 
+void clamp(float &val, float min, float max) {
+	if (val < min) val = min;
+	if (val > max) val = max;
+}
+
 void MovePlayerSystem::processEntity(artemis::Entity &e) {
 
 	//PlayerInputComponent *input 	= (PlayerInputComponent*)e.getComponent<PlayerInputComponent>();
 	VelocityComponent *vel 			= (VelocityComponent*)e.getComponent<VelocityComponent>();
 	PositionComponent *pos 			= (PositionComponent*)e.getComponent<PositionComponent>();
 
-	vel->vX = 0;
-	vel->vY = 0;
+	bool vert = (input.up() || input.down());
+	bool horis = (input.left() || input.right());
+
+	if (!vert) {
+		vel->vY *= 0.96;
+	}
+
+	if (!horis) {
+		vel->vX *= 0.96;
+	}
 
 	if (input.up()) {
 		vel->vY -= 1;
@@ -31,6 +44,10 @@ void MovePlayerSystem::processEntity(artemis::Entity &e) {
 	if (input.right()) {
 		vel->vX += 1;
 	}
+
+	float maxSpeed = 8;
+	clamp(vel->vX, -maxSpeed, maxSpeed);
+	clamp(vel->vY, -maxSpeed, maxSpeed);
 
 	pos->posX += vel->vX;
 	pos->posY += vel->vY;
