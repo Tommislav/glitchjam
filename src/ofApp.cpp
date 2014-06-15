@@ -9,18 +9,19 @@
 #include "PositionComponent.h"
 #include "PlayerInputComponent.h"
 #include "RectangleComponent.h"
+#include "SineOffsetComponent.h"
 #include "RenderRectanglesSystem.h"
 #include "MovePlayerSystem.h"
 #include "InputControllableComponent.h"
 #include "Artemis/EntityProcessingSystem.h"
+#include "MoveSineOffsetSystem.h"
 
 #define KEYCODE_UP 357
 #define KEYCODE_DOWN 359
 #define KEYCODE_LEFT 356
 #define KEYCODE_RIGHT 358
 
-float playerX = 0;
-float playerY = 0;
+
 
 artemis::World _world;
 artemis::EntitySystem *_renderSystem;
@@ -37,27 +38,23 @@ void ofApp::setup(){
 
 	artemis::SystemManager *sm = _world.getSystemManager();
 
-
-	//std::cout << "player input in ofApp: " << playerInput << ", addr: " << std::endl;
 	PlayerInputComponent *input = new PlayerInputComponent();
 	inputBitMask = &(input->movementBitMask);
-
 	sm->setSystem(new MovePlayerSystem(*input), true);
+	sm->setSystem(new MoveSineOffsetSystem(), true);
 
 	_renderSystem = sm->setSystem(new RenderRectanglesSystem(), false);
 
     artemis::EntityManager *em = _world.getEntityManager();
 
 
-	for (int i = 0; i < 1000; i ++) {
+	for (int i = 0; i < 500; i ++) {
 		artemis::Entity &enemy = em->create();
 		enemy.addComponent(new PositionComponent(ofRandom(0,1024), ofRandom(0,768)));
 		enemy.addComponent(new RectangleComponent(0,0,10,10, 0xff0000));
-		enemy.addComponent(new VelocityComponent());
-
-		if (ofRandom(0,1) < 0.01) {
-			enemy.addComponent(new InputControllableComponent());
-		}
+		float startRad = ofRandom(0,3);
+		float speed = ofRandom(0.01, 0.1);
+		enemy.addComponent(new SineOffsetComponent(startRad, speed));
 
 		enemy.refresh();
 	}
@@ -66,15 +63,12 @@ void ofApp::setup(){
     artemis::Entity &m_player = em->create();
     m_player.setTag("player");
     m_player.addComponent(new PositionComponent(50,50));
-    m_player.addComponent(new RectangleComponent(0,0,10,15, 0x00ff00));
+    m_player.addComponent(new RectangleComponent(0,0,40,60, 0x00ff00));
     m_player.addComponent(new VelocityComponent());
     m_player.addComponent(new InputControllableComponent());
     m_player.refresh();
 
 
-
-	PositionComponent *comp = (PositionComponent*)m_player.getComponent<PositionComponent>();
-	comp->posX = 30;
 
 	sm->initializeAll();
 	_world.loopStart();
