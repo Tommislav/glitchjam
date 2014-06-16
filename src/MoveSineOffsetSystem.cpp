@@ -10,7 +10,7 @@ MoveSineOffsetSystem::MoveSineOffsetSystem() {
 
 void MoveSineOffsetSystem::processEntity(artemis::Entity &e) {
 	sineMapper.get(e)->rad += sineMapper.get(e)->speed;
-	sineMapper.get(e)->offset = sin(sineMapper.get(e)->rad) * 1.0f;
+	sineMapper.get(e)->offset = sin(sineMapper.get(e)->rad) * 2.0f;
 	positionMapper.get(e)->posY += sineMapper.get(e)->offset;
 }
 

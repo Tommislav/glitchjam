@@ -26,7 +26,7 @@
 artemis::World _world;
 artemis::EntitySystem *_renderSystem;
 
-int *inputBitMask;
+int inputBitMask(0);
 
 
 
@@ -41,8 +41,8 @@ void ofApp::setup(){
 
 	artemis::SystemManager *sm = _world.getSystemManager();
 
-	PlayerInputComponent *input = new PlayerInputComponent();
-	inputBitMask = &(input->movementBitMask);
+	PlayerInputComponent *input = new PlayerInputComponent(&inputBitMask);
+
 	sm->setSystem(new MovePlayerSystem(*input), true);
 	sm->setSystem(new MoveSineOffsetSystem(), true);
 
@@ -94,20 +94,20 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 
-	if (key == KEYCODE_UP) 		{		*inputBitMask |= PlayerInputComponent::MOVE_UP;		}
-	if (key == KEYCODE_DOWN) 	{		*inputBitMask |= PlayerInputComponent::MOVE_DOWN;		}
-	if (key == KEYCODE_LEFT) 	{		*inputBitMask |= PlayerInputComponent::MOVE_LEFT;		}
-	if (key == KEYCODE_RIGHT) 	{		*inputBitMask |= PlayerInputComponent::MOVE_RIGHT;	}
+	if (key == KEYCODE_UP) 		{		inputBitMask |= PlayerInputComponent::MOVE_UP;		}
+	if (key == KEYCODE_DOWN) 	{		inputBitMask |= PlayerInputComponent::MOVE_DOWN;		}
+	if (key == KEYCODE_LEFT) 	{		inputBitMask |= PlayerInputComponent::MOVE_LEFT;		}
+	if (key == KEYCODE_RIGHT) 	{		inputBitMask |= PlayerInputComponent::MOVE_RIGHT;	}
 
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
 
-	if (key == KEYCODE_UP) 		{		*inputBitMask &= ~PlayerInputComponent::MOVE_UP;		}
-	if (key == KEYCODE_DOWN) 	{		*inputBitMask &= ~PlayerInputComponent::MOVE_DOWN;	}
-	if (key == KEYCODE_LEFT) 	{		*inputBitMask &= ~PlayerInputComponent::MOVE_LEFT;	}
-	if (key == KEYCODE_RIGHT) 	{		*inputBitMask &= ~PlayerInputComponent::MOVE_RIGHT;	}
+	if (key == KEYCODE_UP) 		{		inputBitMask &= ~PlayerInputComponent::MOVE_UP;		}
+	if (key == KEYCODE_DOWN) 	{		inputBitMask &= ~PlayerInputComponent::MOVE_DOWN;	}
+	if (key == KEYCODE_LEFT) 	{		inputBitMask &= ~PlayerInputComponent::MOVE_LEFT;	}
+	if (key == KEYCODE_RIGHT) 	{		inputBitMask &= ~PlayerInputComponent::MOVE_RIGHT;	}
 
 }
 
