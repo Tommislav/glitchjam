@@ -7,8 +7,9 @@
 class SineOffsetComponent : public artemis::Component
 {
 	public:
-		SineOffsetComponent(float start, float speed);
-		virtual ~SineOffsetComponent();
+		SineOffsetComponent(float start, float speed):rad(start), speed(speed){
+		}
+		virtual ~SineOffsetComponent(){}
 		float rad;
 		float offset;
 		float speed;

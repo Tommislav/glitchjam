@@ -4,6 +4,7 @@
 #include "ofMain.h"
 #include "ofMath.h"
 
+int cnt(0);
 
 RenderRectanglesSystem::RenderRectanglesSystem()
 {
@@ -17,7 +18,14 @@ void RenderRectanglesSystem::processEntity(artemis::Entity &e) {
 	RectangleComponent *r = (RectangleComponent*)e.getComponent<RectangleComponent>();
 	PositionComponent *p = (PositionComponent*)e.getComponent<PositionComponent>();
 
-	ofSetHexColor( r->color );
+
+	int color = r->color;
+	if (++cnt > 24) {
+		color = 0xffff00;
+		cnt = 0;
+	}
+
+	ofSetHexColor( color );
 	ofRect(p->posX, p->posY, r->width, r->height);
 
 /*
