@@ -7,8 +7,9 @@
 class InputControllableComponent : public artemis::Component
 {
 	public:
-		InputControllableComponent();
-		virtual ~InputControllableComponent();
+		InputControllableComponent() {}
+		~InputControllableComponent() {}
+
 	protected:
 	private:
 };

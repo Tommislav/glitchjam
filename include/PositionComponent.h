@@ -7,9 +7,11 @@
 class PositionComponent : public artemis::Component
 {
 	public:
-		PositionComponent(float posX, float posY);
 		float posX;
 		float posY;
+
+		PositionComponent(float posX, float posY):posX(posX), posY(posY) {}
+		~PositionComponent(){}
 };
 
 #endif // POSITIONCOMPONENT_H

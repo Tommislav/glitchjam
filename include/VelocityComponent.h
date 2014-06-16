@@ -7,9 +7,11 @@
 class VelocityComponent : public artemis::Component
 {
 	public:
-		VelocityComponent();
 		float vX;
 		float vY;
+
+		VelocityComponent(): vX(0), vY(0) {}
+		~VelocityComponent() {}
 };
 
 #endif // VELOCITYCOMPONENT_H
