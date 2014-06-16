@@ -20,6 +20,8 @@ namespace artemis {
     Bag<EntitySystem*> & getSystems();
     EntitySystem* setSystem(EntitySystem * stm, bool autoProcess);
 
+	World* getWorld();
+
     template<typename eSystem>
     EntitySystem* getSystem() {
       return (eSystem*)(systems[&typeid(eSystem)]);

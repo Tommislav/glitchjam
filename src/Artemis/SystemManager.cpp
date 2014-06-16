@@ -9,6 +9,8 @@ namespace artemis {
     this->world = &world;
   }
 
+  World* SystemManager::getWorld() { return this->world; }
+
   Bag<EntitySystem*> & SystemManager::getSystems() {
     return bagged;
   }

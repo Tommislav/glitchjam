@@ -42,11 +42,13 @@ void ofApp::setup(){
 	artemis::SystemManager *sm = _world.getSystemManager();
 
 	PlayerInputComponent *input = new PlayerInputComponent(&inputBitMask);
+	CameraComponent *camera = new CameraComponent(1024, 768);
+	//_world.getTagManager()->subscribe("camera", *camera);
 
 	sm->setSystem(new MovePlayerSystem(*input), true);
 	sm->setSystem(new MoveSineOffsetSystem(), true);
 
-	_renderSystem = sm->setSystem(new RenderRectanglesSystem(), false);
+	_renderSystem = sm->setSystem(new RenderRectanglesSystem(*camera), false);
 
     artemis::EntityManager *em = _world.getEntityManager();
 
