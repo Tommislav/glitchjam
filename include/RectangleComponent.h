@@ -7,12 +7,14 @@
 class RectangleComponent : public artemis::Component
 {
 	public:
-		RectangleComponent(int x, int y, int w, int h, int col);
 		int x;
 		int y;
 		int width;
 		int height;
 		int color;
+
+		RectangleComponent(int x, int y, int w, int h, int col):x(x), y(y), width(w), height(h), color(col) {}
+		~RectangleComponent() {}
 };
 
 #endif // RECTANGLECOMPONENT_H
