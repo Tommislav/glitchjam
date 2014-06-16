@@ -15,11 +15,14 @@
 #include "InputControllableComponent.h"
 #include "Artemis/EntityProcessingSystem.h"
 #include "MoveSineOffsetSystem.h"
+#include "ShakeCameraSystem.h"
 
 #define KEYCODE_UP 357
 #define KEYCODE_DOWN 359
 #define KEYCODE_LEFT 356
 #define KEYCODE_RIGHT 358
+#define KEYCODE_Z 122
+#define KEYCODE_X 120
 
 
 
@@ -47,10 +50,16 @@ void ofApp::setup(){
 
 	sm->setSystem(new MovePlayerSystem(*input), true);
 	sm->setSystem(new MoveSineOffsetSystem(), true);
+	sm->setSystem(new ShakeCameraSystem(*input), true);
 
 	_renderSystem = sm->setSystem(new RenderRectanglesSystem(*camera), false);
 
     artemis::EntityManager *em = _world.getEntityManager();
+
+    artemis::Entity &sys = em->create();
+    sys.addComponent(camera);
+    sys.addComponent(input);
+    sys.refresh();
 
 
 	for (int i = 0; i < 500; i ++) {
@@ -97,9 +106,13 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key){
 
 	if (key == KEYCODE_UP) 		{		inputBitMask |= PlayerInputComponent::MOVE_UP;		}
-	if (key == KEYCODE_DOWN) 	{		inputBitMask |= PlayerInputComponent::MOVE_DOWN;		}
-	if (key == KEYCODE_LEFT) 	{		inputBitMask |= PlayerInputComponent::MOVE_LEFT;		}
+	if (key == KEYCODE_DOWN) 	{		inputBitMask |= PlayerInputComponent::MOVE_DOWN;	}
+	if (key == KEYCODE_LEFT) 	{		inputBitMask |= PlayerInputComponent::MOVE_LEFT;	}
 	if (key == KEYCODE_RIGHT) 	{		inputBitMask |= PlayerInputComponent::MOVE_RIGHT;	}
+	if (key == KEYCODE_Z) 		{		inputBitMask |= PlayerInputComponent::ATK_1;		}
+	if (key == KEYCODE_X) 		{		inputBitMask |= PlayerInputComponent::ATK_2;		}
+
+	//std::cout << "Key pressed " << key << std::endl;
 
 }
 
@@ -110,7 +123,8 @@ void ofApp::keyReleased(int key){
 	if (key == KEYCODE_DOWN) 	{		inputBitMask &= ~PlayerInputComponent::MOVE_DOWN;	}
 	if (key == KEYCODE_LEFT) 	{		inputBitMask &= ~PlayerInputComponent::MOVE_LEFT;	}
 	if (key == KEYCODE_RIGHT) 	{		inputBitMask &= ~PlayerInputComponent::MOVE_RIGHT;	}
-
+	if (key == KEYCODE_Z) 		{		inputBitMask &= ~PlayerInputComponent::ATK_1;		}
+	if (key == KEYCODE_X) 		{		inputBitMask &= ~PlayerInputComponent::ATK_2;		}
 }
 
 //--------------------------------------------------------------
