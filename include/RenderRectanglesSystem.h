@@ -4,8 +4,7 @@
 #include <Artemis/EntityProcessingSystem.h>
 
 #include <Artemis/ComponentMapper.h>
-#include <RectangleComponent.h>
-#include <PositionComponent.h>
+
 
 
 class RenderRectanglesSystem : public artemis::EntityProcessingSystem
