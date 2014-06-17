@@ -16,6 +16,7 @@
 #include "Artemis/EntityProcessingSystem.h"
 #include "MoveSineOffsetSystem.h"
 #include "ShakeCameraSystem.h"
+#include "RemoveEntitiesConditionSystem.h"
 
 #define KEYCODE_UP 357
 #define KEYCODE_DOWN 359
@@ -51,6 +52,7 @@ void ofApp::setup(){
 	sm->setSystem(new MovePlayerSystem(*input), true);
 	sm->setSystem(new MoveSineOffsetSystem(), true);
 	sm->setSystem(new ShakeCameraSystem(*input), true);
+	sm->setSystem(new RemoveEntitiesConditionSystem(), true);
 
 	_renderSystem = sm->setSystem(new RenderRectanglesSystem(*camera), false);
 
@@ -85,11 +87,12 @@ void ofApp::setup(){
 
 
 	sm->initializeAll();
-	_world.loopStart();
+
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+_world.loopStart();
 	_world.process();
 }
 

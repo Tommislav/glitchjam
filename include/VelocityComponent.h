@@ -11,6 +11,7 @@ class VelocityComponent : public artemis::Component
 		float vY;
 
 		VelocityComponent(): vX(0), vY(0) {}
+		VelocityComponent(float velX, float velY):vX(velX), vY(velY) {}
 		~VelocityComponent() {}
 };
 
