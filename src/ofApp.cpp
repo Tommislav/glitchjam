@@ -17,6 +17,7 @@
 #include "MoveSineOffsetSystem.h"
 #include "ShakeCameraSystem.h"
 #include "RemoveEntitiesConditionSystem.h"
+#include "MoveWithVelocitySystem.h"
 
 #define KEYCODE_UP 357
 #define KEYCODE_DOWN 359
@@ -53,6 +54,7 @@ void ofApp::setup(){
 	sm->setSystem(new MoveSineOffsetSystem(), true);
 	sm->setSystem(new ShakeCameraSystem(*input), true);
 	sm->setSystem(new RemoveEntitiesConditionSystem(), true);
+	sm->setSystem(new MoveWithVelocitySystem(), true);
 
 	_renderSystem = sm->setSystem(new RenderRectanglesSystem(*camera), false);
 

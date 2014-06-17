@@ -1,6 +1,7 @@
 #ifndef SHAKECAMERASYSTEM_H
 #define SHAKECAMERASYSTEM_H
 
+#include <math.h>
 #include "ofMath.h"
 #include "RemoveEntityConditionComponent.h"
 
@@ -52,14 +53,21 @@ class ShakeCameraSystem : public artemis::EntityProcessingSystem
 				// Create particles
 				float explosionX = ofRandom(0,cam->cameraW) + cam->cameraX;
 				float explosionY = ofRandom(0,cam->cameraH) + cam->cameraY;
-				for (int i = 0; i < 10; i++) {
+				for (int i = 0; i < 30; i++) {
 					artemis::Entity &em = world->createEntity();
+
+					float rad = ofRandom(0, 6.28);
+					float velX = cos(rad);
+					float velY = sin(rad);
+					float offset = ofRandom(10, 15);
+					float speed = ofRandom(1,7);
+
 					em.addComponent(new PositionComponent(
-						explosionX + ofRandom(-10, 10),
-						explosionY + ofRandom(-10, 10)
+						explosionX + (velX * offset),
+						explosionY + (velY * offset)
 					));
-					em.addComponent(new RectangleComponent(-5, -5, 10, 10, 0xffff00));
-					em.addComponent(new VelocityComponent(ofRandom(-5, 5), ofRandom(-5, 5)));
+					em.addComponent(new RectangleComponent(-6, -6, 12, 12, 0xffff00));
+					em.addComponent(new VelocityComponent(velX * speed, velY * speed));
 					em.addComponent(new RemoveEntityConditionComponent(ofRandom(50,70), false));
 					em.refresh();
 

@@ -34,9 +34,12 @@
 		<Unit filename="include/InputControllableComponent.h" />
 		<Unit filename="include/MovePlayerSystem.h" />
 		<Unit filename="include/MoveSineOffsetSystem.h" />
+		<Unit filename="include/MoveWithVelocitySystem.h" />
 		<Unit filename="include/PlayerInputComponent.h" />
 		<Unit filename="include/PositionComponent.h" />
 		<Unit filename="include/RectangleComponent.h" />
+		<Unit filename="include/RemoveEntitiesConditionSystem.h" />
+		<Unit filename="include/RemoveEntityConditionComponent.h" />
 		<Unit filename="include/RenderRectanglesSystem.h" />
 		<Unit filename="include/ShakeCameraSystem.h" />
 		<Unit filename="include/SineOffsetComponent.h" />

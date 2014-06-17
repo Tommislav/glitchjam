@@ -49,8 +49,8 @@ void MovePlayerSystem::processEntity(artemis::Entity &e) {
 	clamp(vel->vX, -maxSpeed, maxSpeed);
 	clamp(vel->vY, -maxSpeed, maxSpeed);
 
-	pos->posX += vel->vX;
-	pos->posY += vel->vY;
+	//pos->posX += vel->vX;
+	//pos->posY += vel->vY;
 }
 
 
