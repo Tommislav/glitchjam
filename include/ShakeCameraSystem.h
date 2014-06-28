@@ -9,24 +9,13 @@
 class ShakeCameraSystem : public artemis::EntityProcessingSystem
 {
 	private:
-		ofSoundPlayer explosionSnd;
-		bool soundLoaded = false;;
 		artemis::ComponentMapper<CameraComponent> cameraMapper;
 
-		int quakeCount;
-		int qX;
-		int qY;
-
-
 	public:
-
-
-		ShakeCameraSystem(): quakeCount(0){
+		ShakeCameraSystem() {
 			addComponentType<CameraComponent>();
 		}
-		virtual ~ShakeCameraSystem(){
-			explosionSnd.unloadSound();
-		}
+		virtual ~ShakeCameraSystem(){}
 
 		virtual void initialize() {
 			cameraMapper.init(*world);
@@ -35,22 +24,16 @@ class ShakeCameraSystem : public artemis::EntityProcessingSystem
 		virtual void processEntity(artemis::Entity &e){
 
 			CameraComponent *cam = (CameraComponent*) e.getComponent<CameraComponent>();
-			cam->cameraX -= qX;
-			cam->cameraY -= qY;
-			qX = 0;
-			qY = 0;
+			if (cam->quakeCount > 0) {
+				cam->quakeCount--;
 
-			if (quakeCount > 0) {
-				quakeCount--;
-
-				int s = quakeCount / 2;
-
-				qX = ofRandom(-s, s);
-				qY = ofRandom(-s, s);
-
-				cam->cameraX += qX;
-				cam->cameraY += qY;
-
+				float qX = ofRandom(-cam->quakeSize, cam->quakeSize);
+				float qY = ofRandom(-cam->quakeSize, cam->quakeSize);
+				cam->cameraX = qX;
+				cam->cameraY = qY;
+			} else {
+				cam->cameraX = 0;
+				cam->cameraY = 0;
 			}
 
 

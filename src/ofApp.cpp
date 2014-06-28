@@ -23,6 +23,7 @@
 #include "PlayerComponent.h"
 #include "TurretComponent.h"
 #include "TurretSystem.h"
+#include "BulletCollisionSystem.h"
 
 // ARROW KEYS
 #define KEYCODE_UP 357
@@ -74,31 +75,53 @@ void ofApp::setup(){
 
 	sm->setSystem(new MovePlayerSystem(), true);
 	sm->setSystem(new MoveSineOffsetSystem(), true);
+	sm->setSystem(new SpawnBulletSystem(), true);
 	sm->setSystem(new ShakeCameraSystem(), true);
 	sm->setSystem(new RemoveEntitiesConditionSystem(), true);
 	sm->setSystem(new MoveWithVelocitySystem(), true);
+	sm->setSystem(new BulletCollisionSystem(), true);
 	sm->setSystem(new TurretSystem(), true);
-	sm->setSystem(new SpawnBulletSystem(), true);
 
 	_renderSystem = sm->setSystem(new RenderRectanglesSystem(*camera), false);
 
     artemis::EntityManager *em = _world.getEntityManager();
 
     artemis::Entity &sys = em->create();
+    sys.setTag("system");
     sys.addComponent(camera);
     sys.refresh();
 
 
+	// stars (bg particles)
 	for (int i = 0; i < 500; i ++) {
-		artemis::Entity &enemy = em->create();
-		enemy.addComponent(new PositionComponent(ofRandom(0,1024), ofRandom(0,768)));
-		enemy.addComponent(new RectangleComponent(0,0,4,4, 0x333333, 0));
+		artemis::Entity &star = em->create();
+		star.addComponent(new PositionComponent(ofRandom(0,1024), ofRandom(0,768)));
+		star.addComponent(new RectangleComponent(0,0,4,4, 0x333333, 0));
 		float startRad = ofRandom(0,3);
 		float speed = ofRandom(0.01, 0.1);
-		enemy.addComponent(new SineOffsetComponent(startRad, speed));
-
-		enemy.refresh();
+		star.addComponent(new SineOffsetComponent(startRad, speed));
+		star.refresh();
 	}
+
+	// enemies
+	artemis::Entity &enemy = em->create();
+	enemy.addComponent(new PositionComponent(0, 100));
+	enemy.addComponent(new RectangleComponent(-20, -20, 40, 40, 0xcc0000, 0));
+	enemy.addComponent(new VelocityComponent(2,0.5));
+	enemy.addComponent(new RemoveEntityConditionComponent(99999, true));
+	enemy.addComponent(new BulletCollidableComponent(5, 1, 3));
+	enemy.refresh();
+
+	artemis::Entity &enemy2 = em->create();
+	enemy2.addComponent(new PositionComponent(0, 80));
+	enemy2.addComponent(new RectangleComponent(-20, -20, 40, 40, 0xcc0000, 0));
+	enemy2.addComponent(new VelocityComponent(1, 0.1));
+	enemy2.addComponent(new RemoveEntityConditionComponent(99999, true));
+	enemy2.addComponent(new BulletCollidableComponent(50, 1, 7));
+	enemy2.refresh();
+
+
+
 
 
     artemis::Entity &m_player = em->create();
@@ -106,7 +129,7 @@ void ofApp::setup(){
     m_player.addComponent(new PlayerComponent(0));
     m_player.addComponent(new PositionComponent(400,300));
     m_player.addComponent(new RectangleComponent(-15,-15, 30, 30, 0x00ff00, 0));
-    m_player.addComponent(new VelocityComponent());
+    m_player.addComponent(new VelocityComponent(1,1));
     m_player.addComponent(new InputControllableComponent());
     m_player.addComponent(new FireBulletComponent(8, true, 0, -15));
     m_player.refresh();

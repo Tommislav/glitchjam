@@ -14,7 +14,9 @@ class RectangleComponent : public artemis::Component
 		int color;
 		int layer;
 
-		RectangleComponent(int x, int y, int w, int h, int col, int layer):x(x), y(y), width(w), height(h), color(col), layer(layer) {}
+		int tempColor; // used if we need to tween color... ugly...
+
+		RectangleComponent(int x, int y, int w, int h, int col, int layer):x(x), y(y), width(w), height(h), color(col), layer(layer), tempColor(0) {}
 		~RectangleComponent() {}
 };
 

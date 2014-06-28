@@ -8,8 +8,8 @@ class FireBulletComponent : public artemis::Component {
 		bool friendly;
 		float dirX;
 		float dirY;
-		int offX = 0;
-		int offY = 0;
+		int offX;
+		int offY;
 
 		FireBulletComponent(int shootInterval, bool friendly, int offX=0, int offY=0): shootInterval(shootInterval), shootCountdown(shootInterval), friendly(friendly), dirX(0), dirY(-12), offX(offX), offY(offY) {}
 		~FireBulletComponent(){}

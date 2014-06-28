@@ -9,11 +9,11 @@ class SpawnBulletSystem : public artemis::EntityProcessingSystem
 	private:
 		artemis::ComponentMapper<FireBulletComponent> bulMapper;
 		artemis::ComponentMapper<PositionComponent> posMapper;
-		bool soundLoaded = false;
+		bool soundLoaded;
 		ofSoundPlayer pew;
 
 	public:
-		SpawnBulletSystem() {
+		SpawnBulletSystem():soundLoaded(false) {
 			addComponentType<FireBulletComponent>();
 			addComponentType<PositionComponent>();
 		}
@@ -48,6 +48,7 @@ class SpawnBulletSystem : public artemis::EntityProcessingSystem
 				bullet.addComponent(new RectangleComponent(-5, -5, 10, 10, 0xffffff, 0));
 				bullet.addComponent(new RemoveEntityConditionComponent(200, true));
 				bullet.addComponent(new BulletComponent( (b->friendly) ? 1 : 2 ));
+				bullet.setGroup("bullet");
 				bullet.refresh();
 
 				shotFired = true;

@@ -38,7 +38,7 @@
 		<Unit filename="include/MovePlayerSystem.h" />
 		<Unit filename="include/MoveSineOffsetSystem.h" />
 		<Unit filename="include/MoveWithVelocitySystem.h" />
-		<Unit filename="include/PlayerInputComponent.h" />
+		<Unit filename="include/PlayerComponent.h" />
 		<Unit filename="include/PositionComponent.h" />
 		<Unit filename="include/RectangleComponent.h" />
 		<Unit filename="include/RemoveEntitiesConditionSystem.h" />
@@ -47,6 +47,8 @@
 		<Unit filename="include/ShakeCameraSystem.h" />
 		<Unit filename="include/SineOffsetComponent.h" />
 		<Unit filename="include/SpawnBulletsSystem.h" />
+		<Unit filename="include/TurretComponent.h" />
+		<Unit filename="include/TurretSystem.h" />
 		<Unit filename="include/VelocityComponent.h" />
 		<Unit filename="src/Artemis/Artemis.h" />
 		<Unit filename="src/Artemis/BitSize.h" />

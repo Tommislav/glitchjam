@@ -91,7 +91,7 @@ void MovePlayerSystem::processEntity(artemis::Entity &e) {
 			turret->moveCount = 30;
 
 
-			if (!(dx == 0 && dy == 0)) {
+			if (!(dx == 0 && dy == 0) && !(fire == NULL)) {
 				fire->dirX = 12 * dx;
 				fire->dirY = 12 * dy;
 				fire->offX = 5 * dx;

@@ -8,7 +8,10 @@ class CameraComponent : public artemis::Component {
 		float cameraW;
 		float cameraH;
 
-		CameraComponent(float width, float height): cameraX(0), cameraY(0), cameraW(width), cameraH(height){}
+		float quakeSize;
+		int quakeCount;
+
+		CameraComponent(float width, float height): cameraX(0), cameraY(0), cameraW(width), cameraH(height), quakeSize(0), quakeCount(0){}
 		~CameraComponent(){}
 };
 
