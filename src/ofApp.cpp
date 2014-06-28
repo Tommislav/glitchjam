@@ -92,7 +92,7 @@ void ofApp::setup(){
 	for (int i = 0; i < 500; i ++) {
 		artemis::Entity &enemy = em->create();
 		enemy.addComponent(new PositionComponent(ofRandom(0,1024), ofRandom(0,768)));
-		enemy.addComponent(new RectangleComponent(0,0,10,10, 0x333333, 0));
+		enemy.addComponent(new RectangleComponent(0,0,4,4, 0x333333, 0));
 		float startRad = ofRandom(0,3);
 		float speed = ofRandom(0.01, 0.1);
 		enemy.addComponent(new SineOffsetComponent(startRad, speed));
@@ -108,7 +108,7 @@ void ofApp::setup(){
     m_player.addComponent(new RectangleComponent(-15,-15, 30, 30, 0x00ff00, 0));
     m_player.addComponent(new VelocityComponent());
     m_player.addComponent(new InputControllableComponent());
-    m_player.addComponent(new FireBulletComponent(10, true, 0, -15));
+    m_player.addComponent(new FireBulletComponent(8, true, 0, -15));
     m_player.refresh();
 
 
@@ -117,7 +117,7 @@ void ofApp::setup(){
 	turretLeft.addComponent(new PositionComponent(360,300));
 	turretLeft.addComponent(new RectangleComponent(-10, -10, 20, 20, 0x00ff00, 0));
 	turretLeft.addComponent(new TurretComponent(-24));
-	turretLeft.addComponent(new FireBulletComponent(10, true, 0, -5));
+	turretLeft.addComponent(new FireBulletComponent(8, true, 0, -5));
 	turretLeft.refresh();
 
 	artemis::Entity &turretRight = em->create();
@@ -125,7 +125,7 @@ void ofApp::setup(){
 	turretRight.addComponent(new PositionComponent(440,300));
 	turretRight.addComponent(new RectangleComponent(-10, -10, 20, 20, 0x00ff00, 0));
 	turretRight.addComponent(new TurretComponent(24));
-	turretRight.addComponent(new FireBulletComponent(10, true, 0, -5));
+	turretRight.addComponent(new FireBulletComponent(8, true, 0, -5));
 	turretRight.refresh();
 
 

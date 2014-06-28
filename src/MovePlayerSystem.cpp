@@ -78,6 +78,8 @@ void MovePlayerSystem::processEntity(artemis::Entity &e) {
 
 			if (resetTurrets) {
 				turretIndex = 1;
+				dx = 0;
+				dy = -1;
 				turret->targetX = playerPos->posX + turret->offX;
 				turret->targetY = playerPos->posY;
 			} else {

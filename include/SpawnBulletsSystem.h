@@ -45,7 +45,7 @@ class SpawnBulletSystem : public artemis::EntityProcessingSystem
 				artemis::Entity &bullet = world->createEntity();
 				bullet.addComponent(new PositionComponent(x + b->offX, y + b->offY));
 				bullet.addComponent(new VelocityComponent(b->dirX, b->dirY));
-				bullet.addComponent(new RectangleComponent(-4, -4, 8, 8, 0xffffff, 0));
+				bullet.addComponent(new RectangleComponent(-5, -5, 10, 10, 0xffffff, 0));
 				bullet.addComponent(new RemoveEntityConditionComponent(200, true));
 				bullet.addComponent(new BulletComponent( (b->friendly) ? 1 : 2 ));
 				bullet.refresh();
