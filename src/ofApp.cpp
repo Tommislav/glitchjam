@@ -50,10 +50,26 @@
 artemis::World _world;
 artemis::EntitySystem *_renderSystem = NULL;
 
+int spawnCountdown = 100;
+int waveCountdown = 1000;
+int wave = 0;
+int spawn = 0;
 
 
-int inputBitMask(0);
+void spawnEnemy() {
+	float x=30;
+	float y=ofRandom(30,200);
+	float vX=ofRandom(0.1, 1);
+	float vY=ofRandom(0.1, 0.5);
 
+	artemis::Entity &enemy = _world.createEntity();
+	enemy.addComponent(new PositionComponent(x, y));
+	enemy.addComponent(new RectangleComponent(-20, -20, 40, 40, 0xcc0000, 0));
+	enemy.addComponent(new VelocityComponent(vX, vY));
+	enemy.addComponent(new RemoveEntityConditionComponent(99999, true));
+	enemy.addComponent(new BulletCollidableComponent(20, 1, 7));
+	enemy.refresh();
+}
 
 
 
@@ -104,21 +120,6 @@ void ofApp::setup(){
 	}
 
 	// enemies
-	artemis::Entity &enemy = em->create();
-	enemy.addComponent(new PositionComponent(0, 100));
-	enemy.addComponent(new RectangleComponent(-20, -20, 40, 40, 0xcc0000, 0));
-	enemy.addComponent(new VelocityComponent(2,0.5));
-	enemy.addComponent(new RemoveEntityConditionComponent(99999, true));
-	enemy.addComponent(new BulletCollidableComponent(5, 1, 3));
-	enemy.refresh();
-
-	artemis::Entity &enemy2 = em->create();
-	enemy2.addComponent(new PositionComponent(0, 80));
-	enemy2.addComponent(new RectangleComponent(-20, -20, 40, 40, 0xcc0000, 0));
-	enemy2.addComponent(new VelocityComponent(1, 0.1));
-	enemy2.addComponent(new RemoveEntityConditionComponent(99999, true));
-	enemy2.addComponent(new BulletCollidableComponent(50, 1, 7));
-	enemy2.refresh();
 
 
 
@@ -156,8 +157,36 @@ void ofApp::setup(){
 
 }
 
+
+
+
+
+
+
 //--------------------------------------------------------------
 void ofApp::update(){
+
+	if (--waveCountdown <= 0) {
+		waveCountdown = 100;
+		spawnEnemy();
+		/*
+		if (--spawnCountdown <= 0) {
+			spawn++;
+			spawnCountdown = 100;
+			spawnEnemy();
+
+			if (spawn > 4) {
+				waveCountdown = 6000;
+				wave++;
+			}
+		}
+		*/
+	}
+
+
+
+
+
 	_world.loopStart();
 	_world.process();
 }

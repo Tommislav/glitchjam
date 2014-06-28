@@ -15,6 +15,8 @@ class BulletCollisionSystem : public artemis::EntityProcessingSystem
 		artemis::ImmutableBag<artemis::Entity*> *bullets;
 		int bulletShatterCount;
 
+		ofSoundPlayer explosion;
+		bool soundLoaded;
 
 
 		void createParticles(float explosionX, float explosionY, int s) {
@@ -64,12 +66,19 @@ class BulletCollisionSystem : public artemis::EntityProcessingSystem
 		}
 
 
+		void playExplosionSound() {
+			if (!soundLoaded) {
+				explosion.loadSound("Explosion1.wav");
+			}
+			explosion.play();
+		}
+
 
 
 	public:
 
 
-		BulletCollisionSystem():bulletShatterCount(0) {
+		BulletCollisionSystem():bulletShatterCount(0),soundLoaded(false){
 			addComponentType<BulletCollidableComponent>();
 			addComponentType<RectangleComponent>();
 			addComponentType<PositionComponent>();
@@ -118,7 +127,7 @@ class BulletCollisionSystem : public artemis::EntityProcessingSystem
 				artemis::Entity *b = bullets->get(i);
 				PositionComponent *bp = (PositionComponent*)b->getComponent<PositionComponent>();
 
-				if (bp == NULL) { continue; }
+				if (bp == NULL || (pos == bp)) { continue; }
 
 				// collision?
 				if (collision(pos->posX, rect->x, pos->posY, rect->y, rect->width, rect->height, bp->posX, bp->posY)) {
@@ -129,7 +138,8 @@ class BulletCollisionSystem : public artemis::EntityProcessingSystem
 					if (coll->hp <= 0) {
 						world->deleteEntity(e);
 						createParticles(bp->posX, bp->posY,1);
-						shakeScreen(15, 15);
+						shakeScreen(10, 8);
+						playExplosionSound();
 					} else {
 						createParticles(bp->posX, bp->posY,0);
 					}
