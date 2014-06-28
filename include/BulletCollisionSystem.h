@@ -17,31 +17,50 @@ class BulletCollisionSystem : public artemis::EntityProcessingSystem
 
 
 
-		void createParticles(float explosionX, float explosionY, int size) {
+		void createParticles(float explosionX, float explosionY, int s) {
+			//int foo [5] = { 16, 2, 77, 40, 12071 };
+			float startOffset[2] 	= {4,2};
+			float numParticles[2] 	= {3,30};
+			float minSpeed[2] 		= {1,2};
+			float maxSpeed[2] 		= {3,3};
+			float minRadOffset[2] 	= {2,11};
+			float maxRadOffset[2] 	= {4,12};
+			int sizeX[2] 			= {-1,-4};
+			int sizeW[2] 			= {2,8};
+			int color[2] 			= {0xffffff, 0xffff00};
+			float minLife[2] 		= {10,40};
+			float maxLife[2] 		= {60,50};
 
-			explosionX += ofRandom(-4,4);
-			explosionY += ofRandom(-4,4);
-			for (int i = 0; i < 3; i++) {
+
+
+			explosionX += ofRandom(-startOffset[s],startOffset[s]);
+			explosionY += ofRandom(-startOffset[s],startOffset[s]);
+			for (int i = 0; i < numParticles[s]; i++) {
 				artemis::Entity &em = world->createEntity();
 
 				float rad = ofRandom(0, 6.28);
 				float velX = cos(rad);
 				float velY = sin(rad);
-				float offset = ofRandom(2, 4);
-				float speed = ofRandom(1,3);
+				float radOffset = ofRandom(minRadOffset[s], maxRadOffset[s]);
+				float speed = ofRandom(minSpeed[s],maxSpeed[s]);
 
 				em.addComponent(new PositionComponent(
-					explosionX + (velX * offset),
-					explosionY + (velY * offset)
+					explosionX + (velX * radOffset),
+					explosionY + (velY * radOffset)
 				));
-				em.addComponent(new RectangleComponent(-1, -1, 2, 2, 0xffffff, 0));
+				em.addComponent(new RectangleComponent(sizeX[s], sizeX[s], sizeW[s], sizeW[s], color[s], 0));
 				em.addComponent(new VelocityComponent(velX * speed, velY * speed));
-				em.addComponent(new RemoveEntityConditionComponent(ofRandom(10,60), false));
+				em.addComponent(new RemoveEntityConditionComponent(ofRandom(minLife[s],maxLife[s]), false));
 				em.refresh();
 
 			}
+		}
 
-
+		void shakeScreen(int length, float str) {
+			artemis::Entity &sys = world->getTagManager()->getEntity("system");
+			CameraComponent *cam = (CameraComponent*)sys.getComponent<CameraComponent>();
+			cam->quakeCount = length;
+			cam->quakeSize = str;
 		}
 
 
@@ -109,12 +128,10 @@ class BulletCollisionSystem : public artemis::EntityProcessingSystem
 
 					if (coll->hp <= 0) {
 						world->deleteEntity(e);
+						createParticles(bp->posX, bp->posY,1);
+						shakeScreen(15, 15);
 					} else {
-						// small bullet praticle
-						//if (bulletShatterCount++ > 2) {
-						//	bulletShatterCount = 0;
-							createParticles(bp->posX, bp->posY, 1);
-						//}
+						createParticles(bp->posX, bp->posY,0);
 					}
 				}
 			}
