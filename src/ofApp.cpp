@@ -21,6 +21,8 @@
 #include "SpawnBulletsSystem.h"
 #include "FireBulletComponent.h"
 #include "PlayerComponent.h"
+#include "TurretComponent.h"
+#include "TurretSystem.h"
 
 // ARROW KEYS
 #define KEYCODE_UP 357
@@ -75,6 +77,7 @@ void ofApp::setup(){
 	sm->setSystem(new ShakeCameraSystem(), true);
 	sm->setSystem(new RemoveEntitiesConditionSystem(), true);
 	sm->setSystem(new MoveWithVelocitySystem(), true);
+	sm->setSystem(new TurretSystem(), true);
 	sm->setSystem(new SpawnBulletSystem(), true);
 
 	_renderSystem = sm->setSystem(new RenderRectanglesSystem(*camera), false);
@@ -101,13 +104,29 @@ void ofApp::setup(){
     artemis::Entity &m_player = em->create();
     m_player.setTag("player");
     m_player.addComponent(new PlayerComponent(0));
-    m_player.addComponent(new PositionComponent(50,50));
-    m_player.addComponent(new RectangleComponent(0,0,30,30, 0x00ff00, 0));
+    m_player.addComponent(new PositionComponent(400,300));
+    m_player.addComponent(new RectangleComponent(-15,-15, 30, 30, 0x00ff00, 0));
     m_player.addComponent(new VelocityComponent());
     m_player.addComponent(new InputControllableComponent());
-    m_player.addComponent(new FireBulletComponent(10, true, 15));
+    m_player.addComponent(new FireBulletComponent(10, true, 0, -15));
     m_player.refresh();
 
+
+	artemis::Entity &turretLeft = em->create();
+	turretLeft.addComponent(new PlayerComponent(1));
+	turretLeft.addComponent(new PositionComponent(360,300));
+	turretLeft.addComponent(new RectangleComponent(-10, -10, 20, 20, 0x00ff00, 0));
+	turretLeft.addComponent(new TurretComponent(-40));
+	turretLeft.addComponent(new FireBulletComponent(10, true, 0, -5));
+	turretLeft.refresh();
+
+	artemis::Entity &turretRight = em->create();
+	turretRight.addComponent(new PlayerComponent(2));
+	turretRight.addComponent(new PositionComponent(440,300));
+	turretRight.addComponent(new RectangleComponent(-10, -10, 20, 20, 0x00ff00, 0));
+	turretRight.addComponent(new TurretComponent(40));
+	turretRight.addComponent(new FireBulletComponent(10, true, 0, -5));
+	turretRight.refresh();
 
 
 	sm->initializeAll();
