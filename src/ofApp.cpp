@@ -20,6 +20,7 @@
 #include "ofSoundPlayer.h"
 #include "SpawnBulletsSystem.h"
 #include "FireBulletComponent.h"
+#include "PlayerComponent.h"
 
 // ARROW KEYS
 #define KEYCODE_UP 357
@@ -99,11 +100,12 @@ void ofApp::setup(){
 
     artemis::Entity &m_player = em->create();
     m_player.setTag("player");
+    m_player.addComponent(new PlayerComponent(0));
     m_player.addComponent(new PositionComponent(50,50));
     m_player.addComponent(new RectangleComponent(0,0,30,30, 0x00ff00, 0));
     m_player.addComponent(new VelocityComponent());
     m_player.addComponent(new InputControllableComponent());
-    m_player.addComponent(new FireBulletComponent(10, true));
+    m_player.addComponent(new FireBulletComponent(10, true, 15));
     m_player.refresh();
 
 

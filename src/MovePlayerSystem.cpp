@@ -3,13 +3,20 @@
 #include <iostream>
 #include "ofMain.h"
 
-MovePlayerSystem::MovePlayerSystem():inputMask(0)
-{
+MovePlayerSystem::MovePlayerSystem():inputMask(0), up(false), down(false) {
 	ofRegisterKeyEvents(this);
+	addComponentType<VelocityComponent>();
+	addComponentType<PlayerComponent>();
 }
 
 MovePlayerSystem::~MovePlayerSystem() {
 	ofUnregisterKeyEvents(this);
+}
+
+void MovePlayerSystem::initialize() {
+	velocityMapper.init(*world);
+	playerMapper.init(*world);
+	//cameraMapper.init(*world);
 }
 
 
@@ -18,21 +25,26 @@ void clamp(float &val, float const &min, float const &max) {
 	if (val > max) val = max;
 }
 
+
+void MovePlayerSystem::begin() {
+	up 		= this->inputMask & MovePlayerSystem::MOVE_UP;
+	down 	= this->inputMask & MovePlayerSystem::MOVE_DOWN;
+	left 	= this->inputMask & MovePlayerSystem::MOVE_LEFT;
+	right 	= this->inputMask & MovePlayerSystem::MOVE_RIGHT;
+
+	vert = (up || down);
+	horis = (left || right);
+}
+
 void MovePlayerSystem::processEntity(artemis::Entity &e) {
+
+	if (((PlayerComponent*)e.getComponent<PlayerComponent>())->type != 0) {
+		return;
+	}
 
 	//PlayerInputComponent *input 	= (PlayerInputComponent*)e.getComponent<PlayerInputComponent>();
 	VelocityComponent *vel 			= (VelocityComponent*)e.getComponent<VelocityComponent>();
 	//PositionComponent *pos 			= (PositionComponent*)e.getComponent<PositionComponent>();
-
-	bool up 	= this->inputMask & MovePlayerSystem::MOVE_UP;
-	bool down 	= this->inputMask & MovePlayerSystem::MOVE_DOWN;
-	bool left 	= this->inputMask & MovePlayerSystem::MOVE_LEFT;
-	bool right 	= this->inputMask & MovePlayerSystem::MOVE_RIGHT;
-
-	cout << "UP: " << up;
-
-	bool vert = (up || down);
-	bool horis = (left || right);
 
 	if (!vert) {
 		vel->vY *= 0.96;
@@ -59,6 +71,9 @@ void MovePlayerSystem::processEntity(artemis::Entity &e) {
 	clamp(vel->vX, -maxSpeed, maxSpeed);
 	clamp(vel->vY, -maxSpeed, maxSpeed);
 
+}
+
+void MovePlayerSystem::end() {
 }
 
 void MovePlayerSystem::keyPressed(ofKeyEventArgs &args) {

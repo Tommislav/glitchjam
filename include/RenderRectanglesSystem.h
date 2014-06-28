@@ -53,8 +53,8 @@ class RenderRectanglesSystem : public artemis::EntityProcessingSystem
 			RectangleComponent *r = rectangleMapper.get(e);
 			PositionComponent *p = positionMapper.get(e);
 
-			int localX = p->posX - camera->cameraX;
-			int localY = p->posY - camera->cameraY;
+			int localX = p->posX + r->x - camera->cameraX;
+			int localY = p->posY + r->y - camera->cameraY;
 
 			if (insideCamera(localX, localY, r->width, r->height)) {
 				ofSetHexColor( r->color );

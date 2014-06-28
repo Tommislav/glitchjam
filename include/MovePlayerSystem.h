@@ -5,7 +5,7 @@
 #include "Artemis/ComponentMapper.h"
 #include "VelocityComponent.h"
 #include "PositionComponent.h"
-#include "InputControllableComponent.h"
+#include "PlayerComponent.h"
 
 #include "ofEvents.h"
 
@@ -50,16 +50,28 @@ class MovePlayerSystem : public artemis::EntityProcessingSystem
 		void keyReleased(ofKeyEventArgs &args);
 
 
+		virtual void initialize();
+		virtual void begin();
+		virtual void end();
 		virtual void processEntity(artemis::Entity &e);
 	protected:
 	private:
 		artemis::ComponentMapper<VelocityComponent> velocityMapper;
-		artemis::ComponentMapper<PositionComponent> positionMapper;
-		artemis::ComponentMapper<InputControllableComponent> inputMarkerMapper;
+		artemis::ComponentMapper<PlayerComponent> playerMapper;
 
 		bool vert;
 		bool horis;
+		bool up;
+		bool down;
+		bool left;
+		bool right;
+		bool atkUp;
+		bool atkDown;
+		bool atkLeft;
+		bool atkRight;
 		int inputMask;
+
+		bool resetDrones;
 
 };
 
