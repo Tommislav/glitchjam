@@ -7,7 +7,6 @@
 #include "EntityManager.h"
 #include "Entity.h"
 #include "PositionComponent.h"
-#include "PlayerInputComponent.h"
 #include "RectangleComponent.h"
 #include "SineOffsetComponent.h"
 #include "RenderRectanglesSystem.h"
@@ -19,11 +18,26 @@
 #include "RemoveEntitiesConditionSystem.h"
 #include "MoveWithVelocitySystem.h"
 #include "ofSoundPlayer.h"
+#include "SpawnBulletsSystem.h"
+#include "FireBulletComponent.h"
 
+// ARROW KEYS
 #define KEYCODE_UP 357
 #define KEYCODE_DOWN 359
 #define KEYCODE_LEFT 356
 #define KEYCODE_RIGHT 358
+
+// WASD
+#define KEYCODE_ATK_UP 119
+#define KEYCODE_ATK_DOWN 115
+#define KEYCODE_ATK_LEFT 97
+#define KEYCODE_ATK_RIGHT 100
+
+// space
+#define KEYCODE_ATK_RESET 32
+
+
+
 #define KEYCODE_Z 122
 #define KEYCODE_X 120
 
@@ -52,15 +66,15 @@ void ofApp::setup(){
 
 	artemis::SystemManager *sm = _world.getSystemManager();
 
-	PlayerInputComponent *input = new PlayerInputComponent(&inputBitMask);
 	CameraComponent *camera = new CameraComponent(1024, 768);
 	//_world.getTagManager()->subscribe("camera", *camera);
 
-	sm->setSystem(new MovePlayerSystem(*input), true);
+	sm->setSystem(new MovePlayerSystem(), true);
 	sm->setSystem(new MoveSineOffsetSystem(), true);
-	sm->setSystem(new ShakeCameraSystem(*input), true);
+	sm->setSystem(new ShakeCameraSystem(), true);
 	sm->setSystem(new RemoveEntitiesConditionSystem(), true);
 	sm->setSystem(new MoveWithVelocitySystem(), true);
+	sm->setSystem(new SpawnBulletSystem(), true);
 
 	_renderSystem = sm->setSystem(new RenderRectanglesSystem(*camera), false);
 
@@ -68,14 +82,13 @@ void ofApp::setup(){
 
     artemis::Entity &sys = em->create();
     sys.addComponent(camera);
-    sys.addComponent(input);
     sys.refresh();
 
 
 	for (int i = 0; i < 500; i ++) {
 		artemis::Entity &enemy = em->create();
 		enemy.addComponent(new PositionComponent(ofRandom(0,1024), ofRandom(0,768)));
-		enemy.addComponent(new RectangleComponent(0,0,10,10, 0xff0000, 0));
+		enemy.addComponent(new RectangleComponent(0,0,10,10, 0x333333, 0));
 		float startRad = ofRandom(0,3);
 		float speed = ofRandom(0.01, 0.1);
 		enemy.addComponent(new SineOffsetComponent(startRad, speed));
@@ -90,6 +103,7 @@ void ofApp::setup(){
     m_player.addComponent(new RectangleComponent(0,0,30,30, 0x00ff00, 0));
     m_player.addComponent(new VelocityComponent());
     m_player.addComponent(new InputControllableComponent());
+    m_player.addComponent(new FireBulletComponent(10, true));
     m_player.refresh();
 
 
@@ -114,29 +128,10 @@ void ofApp::draw(){
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key){
-
-	if (key == KEYCODE_UP) 		{		inputBitMask |= PlayerInputComponent::MOVE_UP;		}
-	if (key == KEYCODE_DOWN) 	{		inputBitMask |= PlayerInputComponent::MOVE_DOWN;	}
-	if (key == KEYCODE_LEFT) 	{		inputBitMask |= PlayerInputComponent::MOVE_LEFT;	}
-	if (key == KEYCODE_RIGHT) 	{		inputBitMask |= PlayerInputComponent::MOVE_RIGHT;	}
-	if (key == KEYCODE_Z) 		{		inputBitMask |= PlayerInputComponent::ATK_1;		}
-	if (key == KEYCODE_X) 		{		inputBitMask |= PlayerInputComponent::ATK_2;		}
-
-	//std::cout << "Key pressed " << key << std::endl;
-
-}
+void ofApp::keyPressed(int key){}
 
 //--------------------------------------------------------------
-void ofApp::keyReleased(int key){
-
-	if (key == KEYCODE_UP) 		{		inputBitMask &= ~PlayerInputComponent::MOVE_UP;		}
-	if (key == KEYCODE_DOWN) 	{		inputBitMask &= ~PlayerInputComponent::MOVE_DOWN;	}
-	if (key == KEYCODE_LEFT) 	{		inputBitMask &= ~PlayerInputComponent::MOVE_LEFT;	}
-	if (key == KEYCODE_RIGHT) 	{		inputBitMask &= ~PlayerInputComponent::MOVE_RIGHT;	}
-	if (key == KEYCODE_Z) 		{		inputBitMask &= ~PlayerInputComponent::ATK_1;		}
-	if (key == KEYCODE_X) 		{		inputBitMask &= ~PlayerInputComponent::ATK_2;		}
-}
+void ofApp::keyReleased(int key){}
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){}

@@ -13,7 +13,6 @@ class ShakeCameraSystem : public artemis::EntityProcessingSystem
 		bool soundLoaded = false;;
 		artemis::ComponentMapper<CameraComponent> cameraMapper;
 
-		PlayerInputComponent *input;
 		int quakeCount;
 		int qX;
 		int qY;
@@ -22,7 +21,7 @@ class ShakeCameraSystem : public artemis::EntityProcessingSystem
 	public:
 
 
-		ShakeCameraSystem(PlayerInputComponent &input):input(&input), quakeCount(0){
+		ShakeCameraSystem(): quakeCount(0){
 			addComponentType<CameraComponent>();
 		}
 		virtual ~ShakeCameraSystem(){
@@ -52,7 +51,11 @@ class ShakeCameraSystem : public artemis::EntityProcessingSystem
 				cam->cameraX += qX;
 				cam->cameraY += qY;
 
-			} else if (input->atk1()) {
+			}
+
+
+			/*
+			else if (input->atk1()) {
 				quakeCount = 40;
 
 
@@ -85,10 +88,9 @@ class ShakeCameraSystem : public artemis::EntityProcessingSystem
 					explosionSnd.loadSound("Explosion1.wav");
 				}
 				explosionSnd.play();
-
-			}
-
+				*/
 		}
+
 	protected:
 
 };

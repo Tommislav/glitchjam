@@ -30,7 +30,10 @@
 		<Unit filename="config.make">
 			<Option virtualFolder="build config" />
 		</Unit>
+		<Unit filename="include/BulletCollidableComponent.h" />
+		<Unit filename="include/BulletComponent.h" />
 		<Unit filename="include/CameraComponent.h" />
+		<Unit filename="include/FireBulletComponent.h" />
 		<Unit filename="include/InputControllableComponent.h" />
 		<Unit filename="include/MovePlayerSystem.h" />
 		<Unit filename="include/MoveSineOffsetSystem.h" />
@@ -43,6 +46,7 @@
 		<Unit filename="include/RenderRectanglesSystem.h" />
 		<Unit filename="include/ShakeCameraSystem.h" />
 		<Unit filename="include/SineOffsetComponent.h" />
+		<Unit filename="include/SpawnBulletsSystem.h" />
 		<Unit filename="include/VelocityComponent.h" />
 		<Unit filename="src/Artemis/Artemis.h" />
 		<Unit filename="src/Artemis/BitSize.h" />
