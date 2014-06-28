@@ -5,12 +5,18 @@
 #include <Artemis/ComponentMapper.h>
 
 #include "CameraComponent.h"
+#include <vector>
 
 
 
 class RenderRectanglesSystem : public artemis::EntityProcessingSystem
 {
 	private:
+
+		int cameraX;
+		int cameraY;
+		std::vector<std::vector<RectangleComponent> > groupedByLayers;
+
 		artemis::ComponentMapper<RectangleComponent> rectangleMapper;
 		artemis::ComponentMapper<PositionComponent> positionMapper;
 		CameraComponent *camera;
@@ -37,6 +43,12 @@ class RenderRectanglesSystem : public artemis::EntityProcessingSystem
 		}
 
 	protected:
+
+		virtual void begin() {
+
+		}
+
+
 		virtual void processEntity(artemis::Entity &e) {
 			RectangleComponent *r = rectangleMapper.get(e);
 			PositionComponent *p = positionMapper.get(e);
@@ -48,6 +60,9 @@ class RenderRectanglesSystem : public artemis::EntityProcessingSystem
 				ofSetHexColor( r->color );
 				ofRect(localX, localY, r->width, r->height);
 			}
+		}
+
+		virtual void end() {
 		}
 
 };

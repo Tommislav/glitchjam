@@ -12,8 +12,9 @@ class RectangleComponent : public artemis::Component
 		int width;
 		int height;
 		int color;
+		int layer;
 
-		RectangleComponent(int x, int y, int w, int h, int col):x(x), y(y), width(w), height(h), color(col) {}
+		RectangleComponent(int x, int y, int w, int h, int col, int layer):x(x), y(y), width(w), height(h), color(col), layer(layer) {}
 		~RectangleComponent() {}
 };
 

@@ -10,7 +10,7 @@ MovePlayerSystem::MovePlayerSystem(PlayerInputComponent &input):input(input)
 MovePlayerSystem::~MovePlayerSystem() {}
 
 
-void clamp(float &val, float min, float max) {
+void clamp(float &val, float const &min, float const &max) {
 	if (val < min) val = min;
 	if (val > max) val = max;
 }

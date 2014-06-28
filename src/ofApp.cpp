@@ -18,6 +18,7 @@
 #include "ShakeCameraSystem.h"
 #include "RemoveEntitiesConditionSystem.h"
 #include "MoveWithVelocitySystem.h"
+#include "ofSoundPlayer.h"
 
 #define KEYCODE_UP 357
 #define KEYCODE_DOWN 359
@@ -29,7 +30,9 @@
 
 
 artemis::World _world;
-artemis::EntitySystem *_renderSystem;
+artemis::EntitySystem *_renderSystem = NULL;
+
+
 
 int inputBitMask(0);
 
@@ -42,6 +45,9 @@ void ofApp::setup(){
     ofSetWindowTitle("Glitch Jam 2014");
 	ofSetFrameRate(60);
 
+
+	bgMusic.loadSound("pulseboy_demo.wav");
+	bgMusic.play();
 
 
 	artemis::SystemManager *sm = _world.getSystemManager();
@@ -69,7 +75,7 @@ void ofApp::setup(){
 	for (int i = 0; i < 500; i ++) {
 		artemis::Entity &enemy = em->create();
 		enemy.addComponent(new PositionComponent(ofRandom(0,1024), ofRandom(0,768)));
-		enemy.addComponent(new RectangleComponent(0,0,10,10, 0xff0000));
+		enemy.addComponent(new RectangleComponent(0,0,10,10, 0xff0000, 0));
 		float startRad = ofRandom(0,3);
 		float speed = ofRandom(0.01, 0.1);
 		enemy.addComponent(new SineOffsetComponent(startRad, speed));
@@ -81,7 +87,7 @@ void ofApp::setup(){
     artemis::Entity &m_player = em->create();
     m_player.setTag("player");
     m_player.addComponent(new PositionComponent(50,50));
-    m_player.addComponent(new RectangleComponent(0,0,40,60, 0x00ff00));
+    m_player.addComponent(new RectangleComponent(0,0,30,30, 0x00ff00, 0));
     m_player.addComponent(new VelocityComponent());
     m_player.addComponent(new InputControllableComponent());
     m_player.refresh();
@@ -94,7 +100,7 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-_world.loopStart();
+	_world.loopStart();
 	_world.process();
 }
 
