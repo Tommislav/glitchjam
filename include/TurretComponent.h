@@ -8,8 +8,9 @@ class TurretComponent : public artemis::Component {
 		int targetX;
 		int targetY;
 		int offX;
+		float moveCount;
 
-		TurretComponent(int offX): attached(false), targetX(0), targetY(0), offX(offX), lockedInPlace(true) {}
+		TurretComponent(int offX): attached(false), targetX(0), targetY(0), offX(offX), lockedInPlace(true), moveCount(1) {}
 		~TurretComponent(){}
 };
 

@@ -52,7 +52,6 @@ void MovePlayerSystem::processEntity(artemis::Entity &e) {
 			if (placeThisTurret) {
 				turretIndex = (turretIndex == 1) ? 2 : 1; // only two turrets
 			}
-			if (resetTurrets) { turretIndex = 1; }
 
 			FireBulletComponent *fire 	= (FireBulletComponent*)e.getComponent<FireBulletComponent>();
 			TurretComponent 	*turret = (TurretComponent*)e.getComponent<TurretComponent>();
@@ -61,10 +60,6 @@ void MovePlayerSystem::processEntity(artemis::Entity &e) {
 			turret->attached = resetTurrets;
 			PositionComponent *playerPos = (PositionComponent*) world->getTagManager()->getEntity("player").getComponent<PositionComponent>();
 
-
-			turret->targetX = playerPos->posX + turret->offX;
-			turret->targetY = playerPos->posY;
-			turret->lockedInPlace = false;
 
 			int dx, dy;
 			if (atkLeft == 1) {
@@ -80,6 +75,19 @@ void MovePlayerSystem::processEntity(artemis::Entity &e) {
 				dx = 0;
 				dy = 1;
 			}
+
+			if (resetTurrets) {
+				turretIndex = 1;
+				turret->targetX = playerPos->posX + turret->offX;
+				turret->targetY = playerPos->posY;
+			} else {
+				float offX = (dy != 0) ? ((type == 1) ? -10 : 10) : 0;
+				turret->targetX = playerPos->posX + dx * 40 + offX;
+				turret->targetY = playerPos->posY + dy * 40;
+			}
+			turret->lockedInPlace = false;
+			turret->moveCount = 30;
+
 
 			if (!(dx == 0 && dy == 0)) {
 				fire->dirX = 12 * dx;
@@ -100,11 +108,11 @@ void MovePlayerSystem::processEntity(artemis::Entity &e) {
 	//PositionComponent *pos 			= (PositionComponent*)e.getComponent<PositionComponent>();
 
 	if (!vert) {
-		vel->vY *= 0.96;
+		vel->vY *= 0.92;
 	}
 
 	if (!horis) {
-		vel->vX *= 0.96;
+		vel->vX *= 0.92;
 	}
 
 	if (up) {

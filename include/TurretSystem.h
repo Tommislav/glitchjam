@@ -50,10 +50,17 @@ class TurretSystem : public artemis::EntityProcessingSystem
 				p->posX = toX;
 				p->posY = toY;
 			} else {
+				float &moveCount = t->moveCount;
+				if (moveCount > 1) {
+					moveCount--;
+				}
+				float splitBy = (moveCount > 6) ? 6 : moveCount;
+
+
 				float dX = toX - p->posX;
 				float dY = toY - p->posY;
-				float mX = dX / 6;
-				float mY = dY / 6;
+				float mX = dX / splitBy;
+				float mY = dY / splitBy;
 
 				p->posX += mX;
 				p->posY += mY;

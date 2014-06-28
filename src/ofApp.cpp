@@ -116,7 +116,7 @@ void ofApp::setup(){
 	turretLeft.addComponent(new PlayerComponent(1));
 	turretLeft.addComponent(new PositionComponent(360,300));
 	turretLeft.addComponent(new RectangleComponent(-10, -10, 20, 20, 0x00ff00, 0));
-	turretLeft.addComponent(new TurretComponent(-40));
+	turretLeft.addComponent(new TurretComponent(-24));
 	turretLeft.addComponent(new FireBulletComponent(10, true, 0, -5));
 	turretLeft.refresh();
 
@@ -124,7 +124,7 @@ void ofApp::setup(){
 	turretRight.addComponent(new PlayerComponent(2));
 	turretRight.addComponent(new PositionComponent(440,300));
 	turretRight.addComponent(new RectangleComponent(-10, -10, 20, 20, 0x00ff00, 0));
-	turretRight.addComponent(new TurretComponent(40));
+	turretRight.addComponent(new TurretComponent(24));
 	turretRight.addComponent(new FireBulletComponent(10, true, 0, -5));
 	turretRight.refresh();
 
