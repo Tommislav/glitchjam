@@ -69,7 +69,7 @@ namespace artemis {
   SystemManager::~SystemManager(){
     systems.clear();
     bagged.deleteData();
-    autoProcessBag.deleteData();
-    bagged.clear();
+	bagged.clear();
+    autoProcessBag.clear();
   }
 };
