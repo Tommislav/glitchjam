@@ -1,6 +1,7 @@
 #ifndef SHOOTABLESYSTEM_H_INCLUDED
 #define SHOOTABLESYSTEM_H_INCLUDED
 
+#include "Settings.h"
 #include "BulletCollidableComponent.h"
 #include "RectangleComponent.h"
 #include "RectangleComponent.h"
@@ -139,7 +140,9 @@ class BulletCollisionSystem : public artemis::EntityProcessingSystem
 						world->deleteEntity(e);
 						createParticles(bp->posX, bp->posY,1);
 						shakeScreen(10, 8);
-						playExplosionSound();
+						if (USE_SOUNDS) {
+							playExplosionSound();
+						}
 					} else {
 						createParticles(bp->posX, bp->posY,0);
 					}

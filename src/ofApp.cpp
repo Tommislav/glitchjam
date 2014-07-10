@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "Settings.h"
 #include "ofApp.h"
 #include "ofMath.h"
 #include "World.h"
@@ -40,10 +41,9 @@
 // space
 #define KEYCODE_ATK_RESET 32
 
-
-
 #define KEYCODE_Z 122
 #define KEYCODE_X 120
+
 
 
 
@@ -79,9 +79,11 @@ void ofApp::setup(){
     ofSetWindowTitle("Glitch Jam 2014");
 	ofSetFrameRate(60);
 
+	if (USE_SOUNDS) {
+		bgMusic.loadSound("pulseboy_demo.wav");
+		bgMusic.play();
+	}
 
-	bgMusic.loadSound("pulseboy_demo.wav");
-	bgMusic.play();
 
 
 	artemis::SystemManager *sm = _world.getSystemManager();

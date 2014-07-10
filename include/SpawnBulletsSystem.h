@@ -1,6 +1,7 @@
 #ifndef SPAWNBULLETSSYSTEM_H
 #define SPAWNBULLETSSYSTEM_H
 
+#include "Settings.h"
 #include "FireBulletComponent.h"
 #include "BulletComponent.h"
 
@@ -55,14 +56,15 @@ class SpawnBulletSystem : public artemis::EntityProcessingSystem
 			}
 
 			if (shotFired) {
+				if (USE_SOUNDS) {
+					if (!soundLoaded) {
+						soundLoaded = true;
+						pew.loadSound("Laser.wav");
+						pew.setVolume(0.1f);
+					}
 
-				if (!soundLoaded) {
-					soundLoaded = true;
-					pew.loadSound("Laser.wav");
-					pew.setVolume(0.1f);
+					pew.play();
 				}
-
-				pew.play();
 			}
 
 		}
