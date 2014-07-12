@@ -4,4 +4,23 @@
 #define USE_SOUNDS false
 
 
+
+
+#define KEYCODE_UP 357
+#define KEYCODE_DOWN 359
+#define KEYCODE_LEFT 356
+#define KEYCODE_RIGHT 358
+
+#define KEYCODE_ATK_UP 119
+#define KEYCODE_ATK_DOWN 115
+#define KEYCODE_ATK_LEFT 97
+#define KEYCODE_ATK_RIGHT 100
+
+
+#define KEYCODE_Z 122
+#define KEYCODE_X 120
+
+
+
+
 #endif // SETTINGS_H

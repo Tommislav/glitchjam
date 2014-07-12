@@ -34,10 +34,14 @@
 		<Unit filename="include/BulletComponent.h" />
 		<Unit filename="include/CameraComponent.h" />
 		<Unit filename="include/FireBulletComponent.h" />
+		<Unit filename="include/GameDataComponent.h" />
+		<Unit filename="include/GameSystem.h" />
 		<Unit filename="include/InputControllableComponent.h" />
 		<Unit filename="include/MovePlayerSystem.h" />
 		<Unit filename="include/MoveSineOffsetSystem.h" />
+		<Unit filename="include/MoveWithPathSystem.h" />
 		<Unit filename="include/MoveWithVelocitySystem.h" />
+		<Unit filename="include/PathComponent.h" />
 		<Unit filename="include/PlayerComponent.h" />
 		<Unit filename="include/PositionComponent.h" />
 		<Unit filename="include/RectangleComponent.h" />
@@ -47,6 +51,7 @@
 		<Unit filename="include/ShakeCameraSystem.h" />
 		<Unit filename="include/SineOffsetComponent.h" />
 		<Unit filename="include/SpawnBulletsSystem.h" />
+		<Unit filename="include/SwarmComponent.h" />
 		<Unit filename="include/TurretComponent.h" />
 		<Unit filename="include/TurretSystem.h" />
 		<Unit filename="include/VelocityComponent.h" />
@@ -83,8 +88,10 @@
 		<Unit filename="src/Artemis/TypeInfoComparator.h" />
 		<Unit filename="src/Artemis/World.cpp" />
 		<Unit filename="src/Artemis/World.h" />
+		<Unit filename="src/GameSystem.cpp" />
 		<Unit filename="src/MovePlayerSystem.cpp" />
 		<Unit filename="src/MoveSineOffsetSystem.cpp" />
+		<Unit filename="src/Settings.h" />
 		<Unit filename="src/main.cpp">
 			<Option virtualFolder="src/" />
 		</Unit>

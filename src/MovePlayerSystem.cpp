@@ -4,6 +4,7 @@
 #include "ofMain.h"
 #include "FireBulletComponent.h"
 #include "TurretComponent.h"
+#include "Settings.h"
 
 MovePlayerSystem::MovePlayerSystem():inputMask(0), up(false), down(false), turretIndex(1) {
 	ofRegisterKeyEvents(this);

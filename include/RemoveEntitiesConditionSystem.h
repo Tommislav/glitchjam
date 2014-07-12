@@ -61,7 +61,7 @@ class RemoveEntitiesConditionSystem : public artemis::EntityProcessingSystem
 
 			//std::cout << "Remove entity? life=" << (r->life) << ", onScreen=" << onScreen << " (has cameraRef:)" << hasCameraRef << std::endl;
 			if (lifeEnded || !onScreen) {
-				std::cout << "Remove entity" << std::endl;
+				//std::cout << "Remove entity" << std::endl;
 
 				world->getEntityManager()->remove(e);
 			}

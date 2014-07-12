@@ -25,25 +25,9 @@
 #include "TurretComponent.h"
 #include "TurretSystem.h"
 #include "BulletCollisionSystem.h"
-
-// ARROW KEYS
-#define KEYCODE_UP 357
-#define KEYCODE_DOWN 359
-#define KEYCODE_LEFT 356
-#define KEYCODE_RIGHT 358
-
-// WASD
-#define KEYCODE_ATK_UP 119
-#define KEYCODE_ATK_DOWN 115
-#define KEYCODE_ATK_LEFT 97
-#define KEYCODE_ATK_RIGHT 100
-
-// space
-#define KEYCODE_ATK_RESET 32
-
-#define KEYCODE_Z 122
-#define KEYCODE_X 120
-
+#include "GameSystem.h"
+#include "GameDataComponent.h"
+#include "MoveWithPathSystem.h"
 
 
 
@@ -54,22 +38,6 @@ int spawnCountdown = 100;
 int waveCountdown = 1000;
 int wave = 0;
 int spawn = 0;
-
-
-void spawnEnemy() {
-	float x=30;
-	float y=ofRandom(30,200);
-	float vX=ofRandom(0.1, 1);
-	float vY=ofRandom(0.1, 0.5);
-
-	artemis::Entity &enemy = _world.createEntity();
-	enemy.addComponent(new PositionComponent(x, y));
-	enemy.addComponent(new RectangleComponent(-20, -20, 40, 40, 0xcc0000, 0));
-	enemy.addComponent(new VelocityComponent(vX, vY));
-	enemy.addComponent(new RemoveEntityConditionComponent(99999, true));
-	enemy.addComponent(new BulletCollidableComponent(20, 1, 7));
-	enemy.refresh();
-}
 
 
 
@@ -89,16 +57,18 @@ void ofApp::setup(){
 	artemis::SystemManager *sm = _world.getSystemManager();
 
 	CameraComponent *camera = new CameraComponent(1024, 768);
-	//_world.getTagManager()->subscribe("camera", *camera);
+	GameDataComponent *gd = new GameDataComponent();
 
 	sm->setSystem(new MovePlayerSystem(), true);
 	sm->setSystem(new MoveSineOffsetSystem(), true);
 	sm->setSystem(new SpawnBulletSystem(), true);
 	sm->setSystem(new ShakeCameraSystem(), true);
 	sm->setSystem(new RemoveEntitiesConditionSystem(), true);
+	sm->setSystem(new MoveWithPathSystem(), true);
 	sm->setSystem(new MoveWithVelocitySystem(), true);
 	sm->setSystem(new BulletCollisionSystem(), true);
 	sm->setSystem(new TurretSystem(), true);
+	sm->setSystem(new GameSystem(), true);
 
 	_renderSystem = sm->setSystem(new RenderRectanglesSystem(*camera), false);
 
@@ -107,6 +77,7 @@ void ofApp::setup(){
     artemis::Entity &sys = em->create();
     sys.setTag("system");
     sys.addComponent(camera);
+    sys.addComponent(gd);
     sys.refresh();
 
 
@@ -121,9 +92,6 @@ void ofApp::setup(){
 		star.refresh();
 	}
 
-	// enemies
-
-
 
 
 
@@ -134,7 +102,7 @@ void ofApp::setup(){
     m_player.addComponent(new RectangleComponent(-15,-15, 30, 30, 0x00ff00, 0));
     m_player.addComponent(new VelocityComponent(1,1));
     m_player.addComponent(new InputControllableComponent());
-    m_player.addComponent(new FireBulletComponent(8, true, 0, -15));
+    //m_player.addComponent(new FireBulletComponent(8, true, 0, -15));
     m_player.refresh();
 
 
@@ -143,7 +111,7 @@ void ofApp::setup(){
 	turretLeft.addComponent(new PositionComponent(360,300));
 	turretLeft.addComponent(new RectangleComponent(-10, -10, 20, 20, 0x00ff00, 0));
 	turretLeft.addComponent(new TurretComponent(-24));
-	turretLeft.addComponent(new FireBulletComponent(8, true, 0, -5));
+	//turretLeft.addComponent(new FireBulletComponent(8, true, 0, -5));
 	turretLeft.refresh();
 
 	artemis::Entity &turretRight = em->create();
@@ -151,7 +119,7 @@ void ofApp::setup(){
 	turretRight.addComponent(new PositionComponent(440,300));
 	turretRight.addComponent(new RectangleComponent(-10, -10, 20, 20, 0x00ff00, 0));
 	turretRight.addComponent(new TurretComponent(24));
-	turretRight.addComponent(new FireBulletComponent(8, true, 0, -5));
+	//turretRight.addComponent(new FireBulletComponent(8, true, 0, -5));
 	turretRight.refresh();
 
 
@@ -167,27 +135,6 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
-	if (--waveCountdown <= 0) {
-		waveCountdown = 100;
-		spawnEnemy();
-		/*
-		if (--spawnCountdown <= 0) {
-			spawn++;
-			spawnCountdown = 100;
-			spawnEnemy();
-
-			if (spawn > 4) {
-				waveCountdown = 6000;
-				wave++;
-			}
-		}
-		*/
-	}
-
-
-
-
 
 	_world.loopStart();
 	_world.process();
