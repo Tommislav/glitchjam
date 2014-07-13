@@ -5,8 +5,11 @@ class SwarmComponent : public artemis::Component {
 	public:
 		bool isMother;
 		bool hasMother;
-		*artemis::Entity mother; // can be NULL
+		artemis::Entity *mother; // can be NULL
 		int swarmId;
+
+		bool usePathOffset;
+		int pathOffset;
 
 		float motherOffX;
 		float motherOffY;

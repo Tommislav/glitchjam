@@ -44,6 +44,14 @@ class MoveWithPathSystem : public artemis::EntityProcessingSystem
 
 			if (index >= points.size()) {
 				// scatter or follow player
+				float rad = ofRandom(0,6.28);
+				float speed = 12;
+
+				VelocityComponent *vel = new VelocityComponent(cos(rad)*speed, sin(rad)*speed);
+				e.addComponent(vel);
+				e.removeComponent<PathComponent>();
+				e.refresh();
+
 				//ofVec2f &p = points[points.size()-1];
 				//pos->posX += p.x;
 				//pos->posY += p.y;

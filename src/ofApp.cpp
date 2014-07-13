@@ -28,6 +28,7 @@
 #include "GameSystem.h"
 #include "GameDataComponent.h"
 #include "MoveWithPathSystem.h"
+#include "MoveSwarmSystem.h"
 
 
 
@@ -65,6 +66,7 @@ void ofApp::setup(){
 	sm->setSystem(new ShakeCameraSystem(), true);
 	sm->setSystem(new RemoveEntitiesConditionSystem(), true);
 	sm->setSystem(new MoveWithPathSystem(), true);
+	sm->setSystem(new MoveSwarmSystem(), true);
 	sm->setSystem(new MoveWithVelocitySystem(), true);
 	sm->setSystem(new BulletCollisionSystem(), true);
 	sm->setSystem(new TurretSystem(), true);
