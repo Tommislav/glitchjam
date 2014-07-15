@@ -76,6 +76,26 @@ class BulletCollisionSystem : public artemis::EntityProcessingSystem
 
 
 
+		void notifySwarmOfMothersDeath(std::string swarmId) {
+
+			std::string debug("");
+
+			artemis::ImmutableBag<artemis::Entity*> *bag = world->getGroupManager()->getEntities(swarmId);
+			for (int i=0; i < bag->getCount(); i++) {
+				artemis::Entity *e = bag->get(i);
+
+				world->getGroupManager()->remove(*e);
+
+				SwarmComponent *sc = (SwarmComponent*)e->getComponent<SwarmComponent>();
+				if (sc != NULL) {
+					sc->hasMother = false;
+				}
+			}
+
+			std::cout << "Mother died with id " << swarmId << ", numChildren " << bag->getCount() << std::endl;
+		}
+
+
 	public:
 
 
@@ -104,12 +124,10 @@ class BulletCollisionSystem : public artemis::EntityProcessingSystem
 		}
 
 	protected:
-		bool collision(float myX, float myOffX, float myY, float myOffY, float myWidth, float myHeight, float bulletX, float bulletY) {
-			float mx = myX + myOffX;
-			float my = myY + myOffY;
+		bool collision(float myX, float myY, float myWidth, float myHeight, float bulletX, float bulletY) {
 
-			if (bulletX >= mx && bulletX <= mx+myWidth) {
-				if (bulletY >= my && bulletY <= my+myHeight) {
+			if (bulletX >= myX && bulletX <= myX+myWidth) {
+				if (bulletY >= myY && bulletY <= myY+myHeight) {
 					return true;
 				}
 			}
@@ -131,21 +149,30 @@ class BulletCollisionSystem : public artemis::EntityProcessingSystem
 				if (bp == NULL || (pos == bp)) { continue; }
 
 				// collision?
-				if (collision(pos->posX, rect->x, pos->posY, rect->y, rect->width, rect->height, bp->posX, bp->posY)) {
+				if (collision((pos->posX + rect->x), (pos->posY + rect->y), rect->width, rect->height, bp->posX, bp->posY)) {
 					world->deleteEntity(*b);
 					coll->hit = true;
 					coll->hp -= 1;
 
-					if (coll->hp <= 0) {
-						world->deleteEntity(e);
-						createParticles(bp->posX, bp->posY,1);
-						shakeScreen(10, 8);
-						if (USE_SOUNDS) {
-							playExplosionSound();
-						}
-					} else {
+					if (coll->hp > 0) {
 						createParticles(bp->posX, bp->posY,0);
 					}
+				}
+
+				if (coll->hp <= 0) {
+					MothershipComponent *m = (MothershipComponent*)e.getComponent<MothershipComponent>();
+					if (m != NULL) {
+						notifySwarmOfMothersDeath(m->swarmId);
+					}
+
+
+					createParticles(bp->posX, bp->posY,1);
+					shakeScreen(10, 8);
+					if (USE_SOUNDS) {
+						playExplosionSound();
+					}
+
+					world->deleteEntity(e);
 				}
 			}
 

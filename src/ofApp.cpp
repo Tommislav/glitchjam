@@ -104,7 +104,7 @@ void ofApp::setup(){
     m_player.addComponent(new RectangleComponent(-15,-15, 30, 30, 0x00ff00, 0));
     m_player.addComponent(new VelocityComponent(1,1));
     m_player.addComponent(new InputControllableComponent());
-    //m_player.addComponent(new FireBulletComponent(8, true, 0, -15));
+    m_player.addComponent(new FireBulletComponent(8, true, 0, -15));
     m_player.refresh();
 
 
@@ -113,7 +113,7 @@ void ofApp::setup(){
 	turretLeft.addComponent(new PositionComponent(360,300));
 	turretLeft.addComponent(new RectangleComponent(-10, -10, 20, 20, 0x00ff00, 0));
 	turretLeft.addComponent(new TurretComponent(-24));
-	//turretLeft.addComponent(new FireBulletComponent(8, true, 0, -5));
+	turretLeft.addComponent(new FireBulletComponent(8, true, 0, -5));
 	turretLeft.refresh();
 
 	artemis::Entity &turretRight = em->create();
@@ -121,7 +121,7 @@ void ofApp::setup(){
 	turretRight.addComponent(new PositionComponent(440,300));
 	turretRight.addComponent(new RectangleComponent(-10, -10, 20, 20, 0x00ff00, 0));
 	turretRight.addComponent(new TurretComponent(24));
-	//turretRight.addComponent(new FireBulletComponent(8, true, 0, -5));
+	turretRight.addComponent(new FireBulletComponent(8, true, 0, -5));
 	turretRight.refresh();
 
 

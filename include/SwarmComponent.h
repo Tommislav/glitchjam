@@ -6,7 +6,7 @@ class SwarmComponent : public artemis::Component {
 		bool isMother;
 		bool hasMother;
 		artemis::Entity *mother; // can be NULL
-		int swarmId;
+		std::string swarmId;
 
 		bool usePathOffset;
 		int pathOffset;
@@ -18,7 +18,7 @@ class SwarmComponent : public artemis::Component {
 		float rotationSpeed;
 		float rotationFriction;
 
-		SwarmComponent(int swarmId) : swarmId(swarmId){}
+		SwarmComponent(std::string swarmId) : swarmId(swarmId){}
 		~SwarmComponent(){}
 };
 

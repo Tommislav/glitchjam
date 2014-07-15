@@ -9,6 +9,7 @@
 
 #include "PathComponent.h"
 #include "SwarmComponent.h"
+#include "MothershipComponent.h"
 
 GameSystem::GameSystem() {
 	addComponentType<GameDataComponent>();
@@ -52,7 +53,7 @@ void GameSystem::generatePath(std::vector<ofVec2f> &anchors, float speed, std::v
 
 void GameSystem::spawnEnemy() {
 
-	int swarmId = 1;
+	std::string swarmId = "1";
 
 	std::vector<ofVec2f> anchors;
 	anchors.push_back(ofVec2f(50,50));
@@ -64,7 +65,7 @@ void GameSystem::spawnEnemy() {
 
 
 	PathComponent *path = new PathComponent();
-	generatePath(anchors, 6, path->points);
+	generatePath(anchors, 2, path->points);
 
 	artemis::Entity &mother = world->createEntity();
 	mother.addComponent(new PositionComponent(anchors[0].x, anchors[0].y));
@@ -72,23 +73,18 @@ void GameSystem::spawnEnemy() {
 	//mother.addComponent(new VelocityComponent(0, 0));
 	mother.addComponent(new RemoveEntityConditionComponent(999, false));
 	mother.addComponent(new BulletCollidableComponent(20, 1, 7));
+	mother.addComponent(new MothershipComponent(swarmId));
 	mother.addComponent(path);
-
-	SwarmComponent *ms = new SwarmComponent(swarmId);
-	ms->isMother = true;
-	ms->hasMother = false;
-	ms->mother = NULL;
-	mother.addComponent(ms);
-
 	mother.refresh();
 
+	world->getGroupManager()->set(swarmId, mother);
 
 	// swarmlings
 	std::vector<ofVec2f> swarmOffset;
 	swarmOffset.push_back(ofVec2f(-60,0));
 	swarmOffset.push_back(ofVec2f(60,0));
 	swarmOffset.push_back(ofVec2f(0,-60));
-	swarmOffset.push_back(ofVec2f(0,60));
+	swarmOffset.push_back(ofVec2f(-120,0));
 
 	for (int i=0; i < swarmOffset.size(); i++) {
 		artemis::Entity &swarmling = world->createEntity();
@@ -106,6 +102,8 @@ void GameSystem::spawnEnemy() {
 
 		swarmling.addComponent(sc);
 		swarmling.refresh();
+
+		world->getGroupManager()->set(swarmId, swarmling);
 	}
 
 
@@ -121,7 +119,7 @@ void GameSystem::processEntity(artemis::Entity &e) {
 	GameDataComponent *gd = gdMapper.get(e);
 
 	if (--gd->swarmCountdown <= 0) {
-		gd->swarmCountdown = 9999;
+		gd->swarmCountdown = 600;
 		spawnEnemy();
 	}
 

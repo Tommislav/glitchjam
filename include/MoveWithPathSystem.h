@@ -59,7 +59,7 @@ class MoveWithPathSystem : public artemis::EntityProcessingSystem
 
 			} else {
 				ofVec2f &p = points[index];
-				std::cout << "sys: position rect at " << p.x << ", " << p.y << std::endl;
+				//std::cout << "sys: position rect at " << p.x << ", " << p.y << std::endl;
 				pos->posX = p.x;
 				pos->posY = p.y;
 				index += 1;

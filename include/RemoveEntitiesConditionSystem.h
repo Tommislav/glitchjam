@@ -1,6 +1,10 @@
 #ifndef REMOVEENTITIESCONDITIONSYSTEM_H
 #define REMOVEENTITIESCONDITIONSYSTEM_H
 
+#include "MothershipComponent.h"
+#include "SwarmComponent.h"
+#include "Artemis/ImmutableBag.h"
+
 class RemoveEntitiesConditionSystem : public artemis::EntityProcessingSystem
 {
 	private:
@@ -19,6 +23,8 @@ class RemoveEntitiesConditionSystem : public artemis::EntityProcessingSystem
 			}
 			return false;
 		}
+
+
 
 
 	public:
@@ -62,7 +68,6 @@ class RemoveEntitiesConditionSystem : public artemis::EntityProcessingSystem
 			//std::cout << "Remove entity? life=" << (r->life) << ", onScreen=" << onScreen << " (has cameraRef:)" << hasCameraRef << std::endl;
 			if (lifeEnded || !onScreen) {
 				//std::cout << "Remove entity" << std::endl;
-
 				world->getEntityManager()->remove(e);
 			}
 		}

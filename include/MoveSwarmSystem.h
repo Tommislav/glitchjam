@@ -3,6 +3,7 @@
 
 #include "SwarmComponent.h"
 
+
 class MoveSwarmSystem : public artemis::EntityProcessingSystem
 {
 	private:
@@ -36,11 +37,17 @@ class MoveSwarmSystem : public artemis::EntityProcessingSystem
 
 				PositionComponent *pos = (PositionComponent*) e.getComponent<PositionComponent>();
 				PositionComponent *mPos = (PositionComponent*) sw->mother->getComponent<PositionComponent>();
+				if (mPos == NULL) {
+					return;
+				}
 
 				pos->posX = mPos->posX + sw->motherOffX;
 				pos->posY = mPos->posY + sw->motherOffY;
-			}
+			} else if (!sw->hasMother) {
 
+				BulletCollidableComponent *bull = (BulletCollidableComponent*) e.getComponent<BulletCollidableComponent>();
+				bull->hp -= 20;
+			}
 		}
 };
 
