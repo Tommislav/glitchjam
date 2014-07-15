@@ -83,14 +83,12 @@ class BulletCollisionSystem : public artemis::EntityProcessingSystem
 			artemis::ImmutableBag<artemis::Entity*> *bag = world->getGroupManager()->getEntities(swarmId);
 			for (int i=0; i < bag->getCount(); i++) {
 				artemis::Entity *e = bag->get(i);
-
-				world->getGroupManager()->remove(*e);
-
 				SwarmComponent *sc = (SwarmComponent*)e->getComponent<SwarmComponent>();
 				if (sc != NULL) {
 					sc->hasMother = false;
 				}
 			}
+
 
 			std::cout << "Mother died with id " << swarmId << ", numChildren " << bag->getCount() << std::endl;
 		}
@@ -142,6 +140,7 @@ class BulletCollisionSystem : public artemis::EntityProcessingSystem
 			RectangleComponent *rect = rectMapper.get(e);
 			PositionComponent *pos = posMapper.get(e);
 
+			// check collision against the bullets and remove bullets/reduce hp
 			for (int i = 0; i < bullets->getCount(); i++) {
 				artemis::Entity *b = bullets->get(i);
 				PositionComponent *bp = (PositionComponent*)b->getComponent<PositionComponent>();
@@ -158,25 +157,25 @@ class BulletCollisionSystem : public artemis::EntityProcessingSystem
 						createParticles(bp->posX, bp->posY,0);
 					}
 				}
-
-				if (coll->hp <= 0) {
-					MothershipComponent *m = (MothershipComponent*)e.getComponent<MothershipComponent>();
-					if (m != NULL) {
-						notifySwarmOfMothersDeath(m->swarmId);
-					}
-
-
-					createParticles(bp->posX, bp->posY,1);
-					shakeScreen(10, 8);
-					if (USE_SOUNDS) {
-						playExplosionSound();
-					}
-
-					world->deleteEntity(e);
-				}
 			}
 
+			// if hp < 0 we have died
+			if (coll->hp <= 0) {
+				MothershipComponent *m = (MothershipComponent*)e.getComponent<MothershipComponent>();
+				if (m != NULL) {
+					notifySwarmOfMothersDeath(m->swarmId);
+					world->getGroupManager()->remove(e);
+				}
 
+
+				createParticles(pos->posX, pos->posY,1);
+				shakeScreen(10, 8);
+				if (USE_SOUNDS) {
+					playExplosionSound();
+				}
+
+				world->deleteEntity(e);
+			}
 			//RemoveEntityConditionComponent *r = removeMapper.get(e);
 		}
 

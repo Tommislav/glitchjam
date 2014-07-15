@@ -51,9 +51,9 @@ void GameSystem::generatePath(std::vector<ofVec2f> &anchors, float speed, std::v
 
 
 
-void GameSystem::spawnEnemy() {
+void GameSystem::spawnEnemy(int& wave) {
 
-	std::string swarmId = "1";
+	std::string swarmId = "wave_" + wave;
 
 	std::vector<ofVec2f> anchors;
 	anchors.push_back(ofVec2f(50,50));
@@ -120,7 +120,8 @@ void GameSystem::processEntity(artemis::Entity &e) {
 
 	if (--gd->swarmCountdown <= 0) {
 		gd->swarmCountdown = 600;
-		spawnEnemy();
+		spawnEnemy(gd->wave);
+		gd->wave++;
 	}
 
 }

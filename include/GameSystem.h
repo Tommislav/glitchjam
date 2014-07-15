@@ -27,7 +27,7 @@ class GameSystem : public artemis::EntityProcessingSystem
 
 
 	private:
-		void spawnEnemy();
+		void spawnEnemy(int& waveNum);
 		void generatePath(std::vector<ofVec2f> &anchors, float speed, std::vector<ofVec2f> &populateInto);
 };
 

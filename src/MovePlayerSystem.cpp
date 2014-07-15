@@ -111,11 +111,11 @@ void MovePlayerSystem::processEntity(artemis::Entity &e) {
 	//PositionComponent *pos 			= (PositionComponent*)e.getComponent<PositionComponent>();
 
 	if (!vert) {
-		vel->vY *= 0.92;
+		vel->vY *= 0.91;
 	}
 
 	if (!horis) {
-		vel->vX *= 0.92;
+		vel->vX *= 0.91;
 	}
 
 	if (up) {
