@@ -71,7 +71,7 @@ void GameSystem::spawnEnemy(int& wave) {
 	mother.addComponent(new PositionComponent(anchors[0].x, anchors[0].y));
 	mother.addComponent(new RectangleComponent(-20, -20, 40, 40, 0xff0000, 0));
 	//mother.addComponent(new VelocityComponent(0, 0));
-	mother.addComponent(new RemoveEntityConditionComponent(999, false));
+	mother.addComponent(new RemoveEntityConditionComponent(3000, false));
 	mother.addComponent(new BulletCollidableComponent(20, 1, 7));
 	mother.addComponent(new MothershipComponent(swarmId));
 	mother.addComponent(path);
@@ -90,7 +90,7 @@ void GameSystem::spawnEnemy(int& wave) {
 		artemis::Entity &swarmling = world->createEntity();
 		swarmling.addComponent(new PositionComponent(swarmOffset[i].x, swarmOffset[i].y));
 		swarmling.addComponent(new RectangleComponent(-20, -20, 40, 40, 0xffff00, 0));
-		swarmling.addComponent(new RemoveEntityConditionComponent(600, false));
+		swarmling.addComponent(new RemoveEntityConditionComponent(3000, false));
 		swarmling.addComponent(new BulletCollidableComponent(20, 1, 4));
 
 		SwarmComponent *sc = new SwarmComponent(swarmId);
@@ -119,7 +119,7 @@ void GameSystem::processEntity(artemis::Entity &e) {
 	GameDataComponent *gd = gdMapper.get(e);
 
 	if (--gd->swarmCountdown <= 0) {
-		gd->swarmCountdown = 600;
+		gd->swarmCountdown = 300;
 		spawnEnemy(gd->wave);
 		gd->wave++;
 	}
