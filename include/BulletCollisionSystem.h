@@ -22,17 +22,17 @@ class BulletCollisionSystem : public artemis::EntityProcessingSystem
 
 		void createParticles(float explosionX, float explosionY, int s) {
 			//int foo [5] = { 16, 2, 77, 40, 12071 };
-			float startOffset[2] 	= {4,2};
-			float numParticles[2] 	= {3,30};
-			float minSpeed[2] 		= {1,2};
-			float maxSpeed[2] 		= {3,3};
-			float minRadOffset[2] 	= {2,11};
-			float maxRadOffset[2] 	= {4,12};
-			int sizeX[2] 			= {-1,-4};
-			int sizeW[2] 			= {2,8};
-			int color[2] 			= {0xffffff, 0xffff00};
-			float minLife[2] 		= {10,40};
-			float maxLife[2] 		= {60,50};
+			float startOffset[] 	= {4,2,2};
+			float numParticles[] 	= {3,8,30};
+			float minSpeed[] 		= {1,2,2};
+			float maxSpeed[] 		= {3,4,3};
+			float minRadOffset[] 	= {2,4,11};
+			float maxRadOffset[] 	= {4,8,12};
+			int sizeX[] 			= {-1,-4,-4};
+			int sizeW[] 			= {2,8,8};
+			int color[] 			= {0xffffff, 0xffff00, 0xffff00};
+			float minLife[] 		= {10,20,40};
+			float maxLife[] 		= {60,30,50};
 
 
 
@@ -137,6 +137,8 @@ class BulletCollisionSystem : public artemis::EntityProcessingSystem
 			RectangleComponent *rect = rectMapper.get(e);
 			PositionComponent *pos = posMapper.get(e);
 
+			bool didCollideWithBullet(false);
+
 			// check collision against the bullets and remove bullets/reduce hp
 			for (int i = 0; i < bullets->getCount(); i++) {
 				artemis::Entity *b = bullets->get(i);
@@ -149,6 +151,7 @@ class BulletCollisionSystem : public artemis::EntityProcessingSystem
 					world->deleteEntity(*b);
 					coll->hit = true;
 					coll->hp -= 1;
+					didCollideWithBullet = true;
 
 					if (coll->hp > 0) {
 						createParticles(bp->posX, bp->posY,0);
@@ -164,8 +167,8 @@ class BulletCollisionSystem : public artemis::EntityProcessingSystem
 					world->getGroupManager()->remove(e);
 				}
 
-
-				createParticles(pos->posX, pos->posY,1);
+				int explosionSize = didCollideWithBullet ? 2 : 1;
+				createParticles(pos->posX, pos->posY, explosionSize);
 				shakeScreen(10, 8);
 				if (USE_SOUNDS) {
 					playExplosionSound();

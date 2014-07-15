@@ -48,8 +48,8 @@ class MoveSwarmSystem : public artemis::EntityProcessingSystem
 					if (n < 0) n = 0;
 					if (n > max -1) n = max -1;
 
-					pos->posX = mPath->points[n].x;
-					pos->posY = mPath->points[n].y;
+					pos->posX = mPath->points[n].x + sw->motherOffX;
+					pos->posY = mPath->points[n].y + sw->motherOffY;
 
 				} else {
 					pos->posX = mPos->posX + sw->motherOffX;
