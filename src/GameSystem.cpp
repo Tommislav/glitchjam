@@ -65,7 +65,7 @@ void GameSystem::spawnEnemy(int& wave) {
 
 
 	PathComponent *path = new PathComponent();
-	generatePath(anchors, 2, path->points);
+	generatePath(anchors, 4, path->points);
 
 	artemis::Entity &mother = world->createEntity();
 	mother.addComponent(new PositionComponent(anchors[0].x, anchors[0].y));
@@ -97,8 +97,14 @@ void GameSystem::spawnEnemy(int& wave) {
 		sc->isMother = false;
 		sc->hasMother = true;
 		sc->mother = &mother;
-		sc->motherOffX = swarmOffset[i].x;
-		sc->motherOffY = swarmOffset[i].y;
+
+		if ((wave & 1) == 0) {
+			sc->motherOffX = swarmOffset[i].x;
+			sc->motherOffY = swarmOffset[i].y;
+		} else {
+			sc->usePathOffset = true;
+			sc->pathOffset = -14 * (i+1);
+		}
 
 		swarmling.addComponent(sc);
 		swarmling.refresh();

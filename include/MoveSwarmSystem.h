@@ -37,12 +37,25 @@ class MoveSwarmSystem : public artemis::EntityProcessingSystem
 
 				PositionComponent *pos = (PositionComponent*) e.getComponent<PositionComponent>();
 				PositionComponent *mPos = (PositionComponent*) sw->mother->getComponent<PositionComponent>();
-				if (mPos == NULL) {
+				PathComponent *mPath = (PathComponent*) sw->mother->getComponent<PathComponent>();
+				if (mPos == NULL || mPath == NULL) {
 					return;
 				}
 
-				pos->posX = mPos->posX + sw->motherOffX;
-				pos->posY = mPos->posY + sw->motherOffY;
+				if (sw->usePathOffset) {
+					int max = mPath->points.size();
+					int n = mPath->currentIndex + sw->pathOffset;
+					if (n < 0) n = 0;
+					if (n > max -1) n = max -1;
+
+					pos->posX = mPath->points[n].x;
+					pos->posY = mPath->points[n].y;
+
+				} else {
+					pos->posX = mPos->posX + sw->motherOffX;
+					pos->posY = mPos->posY + sw->motherOffY;
+				}
+
 			} else if (!sw->hasMother) {
 
 				BulletCollidableComponent *bull = (BulletCollidableComponent*) e.getComponent<BulletCollidableComponent>();

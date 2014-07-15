@@ -18,7 +18,7 @@ class SwarmComponent : public artemis::Component {
 		float rotationSpeed;
 		float rotationFriction;
 
-		SwarmComponent(std::string swarmId) : swarmId(swarmId){}
+		SwarmComponent(std::string swarmId) : swarmId(swarmId), usePathOffset(false){}
 		~SwarmComponent(){}
 };
 

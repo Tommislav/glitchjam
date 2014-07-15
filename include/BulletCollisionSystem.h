@@ -78,8 +78,6 @@ class BulletCollisionSystem : public artemis::EntityProcessingSystem
 
 		void notifySwarmOfMothersDeath(std::string swarmId) {
 
-			std::string debug("");
-
 			artemis::ImmutableBag<artemis::Entity*> *bag = world->getGroupManager()->getEntities(swarmId);
 			for (int i=0; i < bag->getCount(); i++) {
 				artemis::Entity *e = bag->get(i);
@@ -88,7 +86,6 @@ class BulletCollisionSystem : public artemis::EntityProcessingSystem
 					sc->hasMother = false;
 				}
 			}
-
 
 			std::cout << "Mother died with id " << swarmId << ", numChildren " << bag->getCount() << std::endl;
 		}
