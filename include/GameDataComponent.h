@@ -13,7 +13,7 @@ class GameDataComponent : public artemis::Component {
 
 		int swarmCountdown;
 
-		GameDataComponent(): level(0), wave(0), lives(3), score(0), swarmsAlive(0), enemiesAlive(0), swarmCountdown(60	) {}
+		GameDataComponent(): level(0), wave(0), lives(3), score(0), swarmsAlive(0), enemiesAlive(0), swarmCountdown(300) {}
 		~GameDataComponent(){}
 };
 
