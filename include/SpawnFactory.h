@@ -15,58 +15,62 @@
 #include "SwarmComponent.h"
 #include "MothershipComponent.h"
 
+using std::vector;
+
 class SpawnFactory {
 
 	private:
-		void generatePath(std::vector<ofVec2f> &anchors, float speed, std::vector<ofVec2f> &populateInto) {
-			populateInto.push_back(anchors[0]);
+
+		float generatePath(ofVec2f &from, ofVec2f &to, const float &speed, vector<ofVec2f> &popInto) {
+			float len = from.distance(to);
+			float steps = len / speed;
+
+			float dx = (to.x - from.x) / steps;
+			float dy = (to.y - from.y) / steps;
+			int count = 0;
+
+			while (count <= steps) {
+				ofVec2f p = ofVec2f(
+					from.x + (dx * count),
+					from.y + (dy * count)
+				);
+				popInto.push_back(p);
+				count++;
+			}
+
+			return steps;
+		}
+
+
+
+
+
+		void generatePathFromAnchors(std::vector<ofVec2f> &anchors, const float &speed, std::vector<ofVec2f> &populateInto) {
 			for (int i=0; i < anchors.size()-1; i++) {
 				ofVec2f &start = anchors[i];
 				ofVec2f &end = anchors[i+1];
+				generatePath(start, end, speed, populateInto);
+			}
+		}
 
-				float len = start.distance(end);
-				float steps = len / speed;
-
-				float dx = (end.x - start.x) / steps;
-				float dy = (end.y - start.y) / steps;
-
-
-				int count = 0;
-				float interpolate = 1 / steps;
-				while (steps > 0) {
-					ofVec2f p = ofVec2f(
-						start.x + (dx * count),
-						start.y + (dy * count)
-					);
-
-					//std::cout << "create: x:" << p.x << ", y: " << p.y <<std::endl;
-					populateInto.push_back(p);
-					count++;
-					steps -= 1;
-				}
-
+		void appendSinCurve(std::vector<ofVec2f> &path, const int& start, const int& end, const float& str, const float& loops=1.0f) {
+			float oneLoop = 6.28;
+			float tot = oneLoop * loops;
+			float steps = end - start;
+			float dr = tot / steps;
+			int count = 0;
+			while (count <= steps) {
+				path[start + count].y += (sin(dr * count) * str);
+				count++;
 			}
 		}
 
 		void generateSinPath(std::vector<ofVec2f> &popInto, ofVec2f &from, ofVec2f &to) {
-			float speed = 2;
-			float len = from.distance(to);
-			float steps = len / speed;
-			int count;
-			float rad = 0;
-
-			float dx = (to.x - from.x) / steps;
-			float dy = (to.y - from.y) / steps;
-			while (steps > 0) {
-
-				popInto.push_back(ofVec2f(
-						from.x + dx * count,
-						from.y + sin(rad) * 8
-				));
-				rad += 0.1;
-				steps -= 1;
-				count ++;
-			}
+			const float speed = 4;
+			ofVec2f start = ofVec2f(0,100);
+			ofVec2f end = ofVec2f(800,100);
+			float steps = generatePath(start, end, speed, popInto);
+			appendSinCurve(popInto, 0, steps, 20);
 		}
 
 
@@ -79,8 +83,8 @@ class SpawnFactory {
 			std::string swarmId = "wave_" + wave;
 
 			std::vector<ofVec2f> anchors;
-			anchors.push_back(ofVec2f(50,50));
-			anchors.push_back(ofVec2f(800,50));
+			anchors.push_back(ofVec2f(50,80));
+			anchors.push_back(ofVec2f(800,80));
 			anchors.push_back(ofVec2f(800, 250));
 			anchors.push_back(ofVec2f(100, 250));
 			anchors.push_back(ofVec2f(100, 400));
@@ -88,10 +92,12 @@ class SpawnFactory {
 
 
 			PathComponent *path = new PathComponent();
-			//generatePath(anchors, 4, path->points);
-			ofVec2f from = ofVec2f(0,100);
-			ofVec2f to = ofVec2f(800,100);
-			generateSinPath(path->points, from, to);
+			generatePathFromAnchors(anchors, 4, path->points);
+			appendSinCurve(path->points, 0, 240, 30.0f, 2.0f);
+
+			//ofVec2f from = ofVec2f(0,100);
+			//ofVec2f to = ofVec2f(800,100);
+			//generateSinPath(path->points, from, to);
 
 			artemis::Entity &mother = world.createEntity();
 			mother.addComponent(new PositionComponent(anchors[0].x, anchors[0].y));

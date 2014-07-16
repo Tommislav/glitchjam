@@ -6,7 +6,7 @@
 		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="addons/;src/;build config/;" />
+		<Option virtualFolders="src/;artemis/;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/$(PROJECT_NAME)_debug" prefix_auto="1" extension_auto="1" />
@@ -27,18 +27,18 @@
 				<Option projectLinkerOptionsRelation="2" />
 			</Target>
 		</Build>
-		<Unit filename="config.make">
-			<Option virtualFolder="build config" />
-		</Unit>
 		<Unit filename="include/BulletCollidableComponent.h" />
+		<Unit filename="include/BulletCollisionSystem.h" />
 		<Unit filename="include/BulletComponent.h" />
 		<Unit filename="include/CameraComponent.h" />
 		<Unit filename="include/FireBulletComponent.h" />
 		<Unit filename="include/GameDataComponent.h" />
 		<Unit filename="include/GameSystem.h" />
 		<Unit filename="include/InputControllableComponent.h" />
+		<Unit filename="include/MothershipComponent.h" />
 		<Unit filename="include/MovePlayerSystem.h" />
 		<Unit filename="include/MoveSineOffsetSystem.h" />
+		<Unit filename="include/MoveSwarmSystem.h" />
 		<Unit filename="include/MoveWithPathSystem.h" />
 		<Unit filename="include/MoveWithVelocitySystem.h" />
 		<Unit filename="include/PathComponent.h" />
@@ -49,49 +49,122 @@
 		<Unit filename="include/RemoveEntityConditionComponent.h" />
 		<Unit filename="include/RenderRectanglesSystem.h" />
 		<Unit filename="include/ShakeCameraSystem.h" />
+		<Unit filename="include/ShootableSystem.h" />
 		<Unit filename="include/SineOffsetComponent.h" />
 		<Unit filename="include/SpawnBulletsSystem.h" />
+		<Unit filename="include/SpawnFactory.h" />
 		<Unit filename="include/SwarmComponent.h" />
 		<Unit filename="include/TurretComponent.h" />
 		<Unit filename="include/TurretSystem.h" />
 		<Unit filename="include/VelocityComponent.h" />
-		<Unit filename="src/Artemis/Artemis.h" />
-		<Unit filename="src/Artemis/BitSize.h" />
-		<Unit filename="src/Artemis/Component.cpp" />
-		<Unit filename="src/Artemis/Component.h" />
-		<Unit filename="src/Artemis/ComponentMapper.h" />
-		<Unit filename="src/Artemis/ComponentType.cpp" />
-		<Unit filename="src/Artemis/ComponentType.h" />
-		<Unit filename="src/Artemis/ComponentTypeManager.cpp" />
-		<Unit filename="src/Artemis/ComponentTypeManager.h" />
-		<Unit filename="src/Artemis/DelayedEntityProcessingSystem.cpp" />
-		<Unit filename="src/Artemis/DelayedEntityProcessingSystem.h" />
-		<Unit filename="src/Artemis/DelayedEntitySystem.cpp" />
-		<Unit filename="src/Artemis/DelayedEntitySystem.h" />
-		<Unit filename="src/Artemis/Entity.cpp" />
-		<Unit filename="src/Artemis/Entity.h" />
-		<Unit filename="src/Artemis/EntityManager.cpp" />
-		<Unit filename="src/Artemis/EntityManager.h" />
-		<Unit filename="src/Artemis/EntityProcessingSystem.cpp" />
-		<Unit filename="src/Artemis/EntityProcessingSystem.h" />
-		<Unit filename="src/Artemis/EntitySystem.cpp" />
-		<Unit filename="src/Artemis/EntitySystem.h" />
-		<Unit filename="src/Artemis/GroupManager.cpp" />
-		<Unit filename="src/Artemis/GroupManager.h" />
-		<Unit filename="src/Artemis/ImmutableBag.h" />
-		<Unit filename="src/Artemis/SystemBitManager.cpp" />
-		<Unit filename="src/Artemis/SystemBitManager.h" />
-		<Unit filename="src/Artemis/SystemManager.cpp" />
-		<Unit filename="src/Artemis/SystemManager.h" />
-		<Unit filename="src/Artemis/TagManager.cpp" />
-		<Unit filename="src/Artemis/TagManager.h" />
-		<Unit filename="src/Artemis/TypeInfoComparator.h" />
-		<Unit filename="src/Artemis/World.cpp" />
-		<Unit filename="src/Artemis/World.h" />
+		<Unit filename="include/debug/Settings.h">
+			<Option target="Debug" />
+		</Unit>
+		<Unit filename="include/release/Settings.h">
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="src/Artemis/Artemis.h">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/BitSize.h">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/Component.cpp">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/Component.h">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/ComponentMapper.h">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/ComponentType.cpp">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/ComponentType.h">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/ComponentTypeManager.cpp">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/ComponentTypeManager.h">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/DelayedEntityProcessingSystem.cpp">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/DelayedEntityProcessingSystem.h">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/DelayedEntitySystem.cpp">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/DelayedEntitySystem.h">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/Entity.cpp">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/Entity.h">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/EntityManager.cpp">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/EntityManager.h">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/EntityProcessingSystem.cpp">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/EntityProcessingSystem.h">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/EntitySystem.cpp">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/EntitySystem.h">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/GroupManager.cpp">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/GroupManager.h">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/ImmutableBag.h">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/SystemBitManager.cpp">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/SystemBitManager.h">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/SystemManager.cpp">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/SystemManager.h">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/TagManager.cpp">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/TagManager.h">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/TypeInfoComparator.h">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/World.cpp">
+			<Option virtualFolder="artemis/" />
+		</Unit>
+		<Unit filename="src/Artemis/World.h">
+			<Option virtualFolder="artemis/" />
+		</Unit>
 		<Unit filename="src/GameSystem.cpp" />
 		<Unit filename="src/MovePlayerSystem.cpp" />
 		<Unit filename="src/MoveSineOffsetSystem.cpp" />
-		<Unit filename="src/Settings.h" />
 		<Unit filename="src/main.cpp">
 			<Option virtualFolder="src/" />
 		</Unit>
