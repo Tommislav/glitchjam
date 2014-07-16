@@ -21,7 +21,7 @@ class SpawnFactory {
 
 	private:
 
-		float generatePath(ofVec2f &from, ofVec2f &to, const float &speed, vector<ofVec2f> &popInto) {
+		float generatePath(ofVec2f from, ofVec2f to, const float &speed, vector<ofVec2f> &popInto) {
 			float len = from.distance(to);
 			float steps = len / speed;
 
@@ -41,6 +41,11 @@ class SpawnFactory {
 			return steps;
 		}
 
+		void generatePause(ofVec2f at, const int &wait, vector<ofVec2f> &popInto) {
+			for (int i = 0; i < wait; i++) {
+				popInto.push_back(at);
+			}
+		}
 
 
 
@@ -53,14 +58,20 @@ class SpawnFactory {
 			}
 		}
 
-		void appendSinCurve(std::vector<ofVec2f> &path, const int& start, const int& end, const float& str, const float& loops=1.0f) {
+		void appendSinCurve(std::vector<ofVec2f> &path, const int& start, const int& end, const float& str, const float& loops=1.0f, bool bobY=true, bool bobX=false) {
 			float oneLoop = 6.28;
 			float tot = oneLoop * loops;
 			float steps = end - start;
 			float dr = tot / steps;
 			int count = 0;
 			while (count <= steps) {
-				path[start + count].y += (sin(dr * count) * str);
+				if (bobY) {
+					path[start + count].y += (sin(dr * count - 1.57) * str) + str;
+				}
+				if (bobX) {
+					path[start + count].x += (sin(dr * count) * str);
+				}
+
 				count++;
 			}
 		}
@@ -82,25 +93,25 @@ class SpawnFactory {
 		void createSwarm(artemis::World& world, int& wave) {
 			std::string swarmId = "wave_" + wave;
 
-			std::vector<ofVec2f> anchors;
-			anchors.push_back(ofVec2f(50,80));
-			anchors.push_back(ofVec2f(800,80));
-			anchors.push_back(ofVec2f(800, 250));
-			anchors.push_back(ofVec2f(100, 250));
-			anchors.push_back(ofVec2f(100, 400));
-			anchors.push_back(ofVec2f(800, 400));
-
 
 			PathComponent *path = new PathComponent();
-			generatePathFromAnchors(anchors, 4, path->points);
-			appendSinCurve(path->points, 0, 240, 30.0f, 2.0f);
 
+			//float s1 = generatePath(ofVec2f(0,100), ofVec2f(800,100), 2, path->points);
+			//appendSinCurve(path->points, 20, s1-1, 30.0f, 2, true, false);
+
+			float s1= 0;
+			float s2 = generatePath(ofVec2f(800,100), ofVec2f(700, 300), 1, path->points);
+			appendSinCurve(path->points, s1+20, s2-80, 30.0f, 2, false, true);
+			generatePause(ofVec2f(700, 300), 240, path->points);
+			appendSinCurve(path->points, s2, s2+240, 120, 1, true, true);
+			float s3 = generatePath(ofVec2f(700, 300), ofVec2f(500, -40), 4, path->points);
+			appendSinCurve(path->points, s2+240, s3-1, 20, 1, false, true);
 			//ofVec2f from = ofVec2f(0,100);
 			//ofVec2f to = ofVec2f(800,100);
 			//generateSinPath(path->points, from, to);
 
 			artemis::Entity &mother = world.createEntity();
-			mother.addComponent(new PositionComponent(anchors[0].x, anchors[0].y));
+			mother.addComponent(new PositionComponent(path->points[0].x, path->points[0].y));
 			mother.addComponent(new RectangleComponent(-20, -20, 40, 40, 0xff0000, 0));
 			//mother.addComponent(new VelocityComponent(0, 0));
 			mother.addComponent(new RemoveEntityConditionComponent(3000, false));
