@@ -51,7 +51,7 @@ class SpawnFactory {
 
 
 		void generatePathFromAnchors(std::vector<ofVec2f> &anchors, const float &speed, std::vector<ofVec2f> &populateInto) {
-			for (int i=0; i < anchors.size()-1; i++) {
+			for (unsigned int i=0; i < anchors.size()-1; i++) {
 				ofVec2f &start = anchors[i];
 				ofVec2f &end = anchors[i+1];
 				generatePath(start, end, speed, populateInto);
@@ -107,7 +107,6 @@ class SpawnFactory {
 			float s3 = 0;
 			float s4 = 0;
 			float s5 = 0;
-			float s6 = 0;
 
 
 			if (wave == 0) {
@@ -280,7 +279,7 @@ class SpawnFactory {
 			swarmOffset.push_back(ofVec2f(-120,0));
 			*/
 
-			for (int i=0; i < swarmOffset.size(); i++) {
+			for (unsigned int i=0; i < swarmOffset.size(); i++) {
 				artemis::Entity &swarmling = world.createEntity();
 				swarmling.addComponent(new PositionComponent(swarmOffset[i].x, swarmOffset[i].y));
 				swarmling.addComponent(new RectangleComponent(-20, -20, 40, 40, 0xffff00, 0));

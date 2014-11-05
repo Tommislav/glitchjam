@@ -1,0 +1,11 @@
+
+## Before procjam
+O Starfield (bg)
+O Take damage
+O Player dies
+O Remove entities outside of screen
+O Draw line where mothership is going to move
+
+## Procjam
+O New way for spawn intelligence
+O Spawn enemy waves
