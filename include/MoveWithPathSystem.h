@@ -42,7 +42,7 @@ class MoveWithPathSystem : public artemis::EntityProcessingSystem
 			*/
 
 
-			if (index >= points.size()) {
+			if (index >= size) {
 				// scatter or follow player
 				float rad = ofRandom(0,6.28);
 				float speed = 12;

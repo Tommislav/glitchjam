@@ -29,11 +29,15 @@
 #include "GameDataComponent.h"
 #include "MoveWithPathSystem.h"
 #include "MoveSwarmSystem.h"
+#include "StarfieldRenderer.h"
 
 
 
 artemis::World _world;
 artemis::EntitySystem *_renderSystem = NULL;
+artemis::EntitySystem *_renderMothershipHints = NULL;
+
+StarfieldRenderer *_renderStarfield = NULL;
 
 int spawnCountdown = 100;
 int waveCountdown = 1000;
