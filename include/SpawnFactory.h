@@ -14,12 +14,16 @@
 #include "PathComponent.h"
 #include "SwarmComponent.h"
 #include "MothershipComponent.h"
+#include "Palette.h"
 
 using std::vector;
+
 
 class SpawnFactory {
 
 	private:
+
+
 
 		float generatePath(ofVec2f from, ofVec2f to, const float &speed, vector<ofVec2f> &popInto) {
 			float len = from.distance(to);
@@ -261,7 +265,7 @@ class SpawnFactory {
 
 			artemis::Entity &mother = world.createEntity();
 			mother.addComponent(new PositionComponent(path->points[0].x, path->points[0].y));
-			mother.addComponent(new RectangleComponent(-20, -20, 40, 40, 0xff0000, 0));
+			mother.addComponent(new RectangleComponent(-20, -20, 40, 40, MOTHER_COLOR, 0));
 			mother.addComponent(new RemoveEntityConditionComponent(3000, false));
 			mother.addComponent(new BulletCollidableComponent(mothershipHp, 1, 7));
 			mother.addComponent(new MothershipComponent(swarmId));
@@ -282,7 +286,7 @@ class SpawnFactory {
 			for (unsigned int i=0; i < swarmOffset.size(); i++) {
 				artemis::Entity &swarmling = world.createEntity();
 				swarmling.addComponent(new PositionComponent(swarmOffset[i].x, swarmOffset[i].y));
-				swarmling.addComponent(new RectangleComponent(-20, -20, 40, 40, 0xffff00, 0));
+				swarmling.addComponent(new RectangleComponent(-20, -20, 40, 40, SWARM_COLOR, 0));
 				swarmling.addComponent(new RemoveEntityConditionComponent(3000, false));
 				swarmling.addComponent(new BulletCollidableComponent(20, 1, 4));
 

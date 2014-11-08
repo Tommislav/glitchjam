@@ -5,6 +5,7 @@
 #include "BulletCollidableComponent.h"
 #include "RectangleComponent.h"
 #include "RectangleComponent.h"
+#include "Palette.h"
 
 class BulletCollisionSystem : public artemis::EntityProcessingSystem
 {
@@ -30,7 +31,8 @@ class BulletCollisionSystem : public artemis::EntityProcessingSystem
 			float maxRadOffset[] 	= {4,8,12};
 			int sizeX[] 			= {-1,-4,-4};
 			int sizeW[] 			= {2,8,8};
-			int color[] 			= {0xffffff, 0xffff00, 0xffff00};
+			//int color[] 			= {0xffffff, 0xffff00, 0xffff00};
+			int color[] 			= {EXPLOSION_COLOR_L, EXPLOSION_COLOR_M, EXPLOSION_COLOR_S};
 			float minLife[] 		= {10,20,40};
 			float maxLife[] 		= {60,30,50};
 

@@ -3,17 +3,30 @@
 
 #include "ofRectangle.h"
 
+struct GlitchStar {
+	float x;
+	float y;
+	float z;
+	float w;
+	float h;
+	float speedX;
+	float speedY;
+};
+
 class StarfieldRenderer
 {
 	public:
-		StarfieldRenderer(int color, int size, int num);
+		StarfieldRenderer(int color, float size, int num);
 		~StarfieldRenderer();
 		void update();
 
 	protected:
 	private:
 		int _numStars;
-		ofRectangle _starArray [];
+		float _starSize;
+		int _color;
+		GlitchStar *_starArray;
+		void randomizeStar(GlitchStar &star);
 };
 
 #endif // STARFIELDRENDERER_H

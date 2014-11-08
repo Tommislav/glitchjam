@@ -3,4 +3,7 @@ bin
 *.layout
 glitchjam.workspace
 *cbTemp
+*.sdf
+*.suo
+ipch
 

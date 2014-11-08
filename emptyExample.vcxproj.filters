@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{0ed11295-8766-48ed-81af-e0de0e723b3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\debug">
+      <UniqueIdentifier>{4c455cc9-c5ff-44c2-89da-73dee4bc0d10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Artemis">
+      <UniqueIdentifier>{192bddd0-a3ea-484f-953c-8a779a1a9247}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\BulletCollidableComponent.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BulletCollisionSystem.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BulletComponent.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CameraComponent.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FireBulletComponent.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameDataComponent.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameSystem.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InputControllableComponent.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MothershipComponent.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MovePlayerSystem.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MoveSineOffsetSystem.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MoveSwarmSystem.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MoveWithPathSystem.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MoveWithVelocitySystem.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PathComponent.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PlayerComponent.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PositionComponent.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RectangleComponent.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RemoveEntitiesConditionSystem.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RemoveEntityConditionComponent.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RenderRectanglesSystem.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ShakeCameraSystem.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ShootableSystem.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SineOffsetComponent.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SpawnBulletsSystem.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SpawnFactory.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SwarmComponent.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TurretComponent.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TurretSystem.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VelocityComponent.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\debug\Settings.h">
+      <Filter>include\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ofApp.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Artemis\Artemis.h">
+      <Filter>src\Artemis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Artemis\BitSize.h">
+      <Filter>src\Artemis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Artemis\Component.h">
+      <Filter>src\Artemis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Artemis\ComponentMapper.h">
+      <Filter>src\Artemis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Artemis\ComponentType.h">
+      <Filter>src\Artemis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Artemis\ComponentTypeManager.h">
+      <Filter>src\Artemis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Artemis\DelayedEntityProcessingSystem.h">
+      <Filter>src\Artemis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Artemis\DelayedEntitySystem.h">
+      <Filter>src\Artemis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Artemis\Entity.h">
+      <Filter>src\Artemis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Artemis\EntityManager.h">
+      <Filter>src\Artemis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Artemis\EntityProcessingSystem.h">
+      <Filter>src\Artemis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Artemis\EntitySystem.h">
+      <Filter>src\Artemis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Artemis\GroupManager.h">
+      <Filter>src\Artemis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Artemis\ImmutableBag.h">
+      <Filter>src\Artemis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Artemis\SystemBitManager.h">
+      <Filter>src\Artemis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Artemis\SystemManager.h">
+      <Filter>src\Artemis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Artemis\TagManager.h">
+      <Filter>src\Artemis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Artemis\TypeInfoComparator.h">
+      <Filter>src\Artemis</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Artemis\World.h">
+      <Filter>src\Artemis</Filter>
+    </ClInclude>
+    <ClInclude Include="include\StarfieldRenderer.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Palette.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\GameSystem.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MovePlayerSystem.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MoveSineOffsetSystem.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ofApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Artemis\Component.cpp">
+      <Filter>src\Artemis</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Artemis\ComponentType.cpp">
+      <Filter>src\Artemis</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Artemis\ComponentTypeManager.cpp">
+      <Filter>src\Artemis</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Artemis\DelayedEntityProcessingSystem.cpp">
+      <Filter>src\Artemis</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Artemis\DelayedEntitySystem.cpp">
+      <Filter>src\Artemis</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Artemis\Entity.cpp">
+      <Filter>src\Artemis</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Artemis\EntityManager.cpp">
+      <Filter>src\Artemis</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Artemis\EntityProcessingSystem.cpp">
+      <Filter>src\Artemis</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Artemis\EntitySystem.cpp">
+      <Filter>src\Artemis</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Artemis\GroupManager.cpp">
+      <Filter>src\Artemis</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Artemis\SystemBitManager.cpp">
+      <Filter>src\Artemis</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Artemis\SystemManager.cpp">
+      <Filter>src\Artemis</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Artemis\TagManager.cpp">
+      <Filter>src\Artemis</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Artemis\World.cpp">
+      <Filter>src\Artemis</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StarfieldRenderer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

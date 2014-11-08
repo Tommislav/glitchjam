@@ -30,6 +30,8 @@
 #include "MoveWithPathSystem.h"
 #include "MoveSwarmSystem.h"
 #include "StarfieldRenderer.h"
+#include "SoundSystem.h"
+#include "Palette.h"
 
 
 
@@ -75,7 +77,9 @@ void ofApp::setup(){
 	sm->setSystem(new BulletCollisionSystem(), true);
 	sm->setSystem(new TurretSystem(), true);
 	sm->setSystem(new GameSystem(), true);
+	sm->setSystem(new SoundSystem(), true);
 
+	_renderStarfield = new StarfieldRenderer(STAR_COLOR, 2, 2000);
 	_renderSystem = sm->setSystem(new RenderRectanglesSystem(*camera), false);
 
     artemis::EntityManager *em = _world.getEntityManager();
@@ -88,7 +92,8 @@ void ofApp::setup(){
 
 
 	// stars (bg particles)
-	for (int i = 0; i < 500; i ++) {
+	/*
+	for (int i = 0; i < 1500; i ++) {
 		artemis::Entity &star = em->create();
 		star.addComponent(new PositionComponent(ofRandom(0,1024), ofRandom(0,768)));
 		star.addComponent(new RectangleComponent(0,0,4,4, 0x333333, 0));
@@ -97,7 +102,7 @@ void ofApp::setup(){
 		star.addComponent(new SineOffsetComponent(startRad, speed));
 		star.refresh();
 	}
-
+	*/
 
 
 
@@ -105,7 +110,7 @@ void ofApp::setup(){
     m_player.setTag("player");
     m_player.addComponent(new PlayerComponent(0));
     m_player.addComponent(new PositionComponent(400,300));
-    m_player.addComponent(new RectangleComponent(-15,-15, 30, 30, 0x00ff00, 0));
+    m_player.addComponent(new RectangleComponent(-15,-15, 30, 30, 0xAEEE00, 0));
     m_player.addComponent(new VelocityComponent(1,1));
     m_player.addComponent(new InputControllableComponent());
     m_player.addComponent(new FireBulletComponent(8, true, 0, -15));
@@ -115,7 +120,7 @@ void ofApp::setup(){
 	artemis::Entity &turretLeft = em->create();
 	turretLeft.addComponent(new PlayerComponent(1));
 	turretLeft.addComponent(new PositionComponent(360,300));
-	turretLeft.addComponent(new RectangleComponent(-10, -10, 20, 20, 0x00ff00, 0));
+	turretLeft.addComponent(new RectangleComponent(-10, -10, 20, 20, 0xAEEE00, 0));
 	turretLeft.addComponent(new TurretComponent(-24));
 	turretLeft.addComponent(new FireBulletComponent(8, true, 0, -5));
 	turretLeft.refresh();
@@ -123,7 +128,7 @@ void ofApp::setup(){
 	artemis::Entity &turretRight = em->create();
 	turretRight.addComponent(new PlayerComponent(2));
 	turretRight.addComponent(new PositionComponent(440,300));
-	turretRight.addComponent(new RectangleComponent(-10, -10, 20, 20, 0x00ff00, 0));
+	turretRight.addComponent(new RectangleComponent(-10, -10, 20, 20, 0xAEEE00, 0));
 	turretRight.addComponent(new TurretComponent(24));
 	turretRight.addComponent(new FireBulletComponent(8, true, 0, -5));
 	turretRight.refresh();
@@ -151,6 +156,7 @@ void ofApp::draw(){
 	//ofSetColor(0, 255, 0);
 	//ofRect(playerX, playerY, 10, 15);
 
+	_renderStarfield->update();
 	_renderSystem->process();
 	ofDrawBitmapString(ofToString(ofGetFrameRate())+"fps", 10, 15);
 }

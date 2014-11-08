@@ -28,7 +28,7 @@ class SoundSystem : public artemis::EntityProcessingSystem
 		unordered_map<string, SoundData*> soundMap;
 		
 		
-		void createSound(string name, int minPlayTime = 1, bool loop = false) {
+		void createSound(string name, int minPlayTime = 1, float volume = 1.0f, bool loop = false) {
 			SoundData sd = SoundData();
 			soundMap.insert(std::make_pair<string, SoundData*>(name, &sd));
 		}
