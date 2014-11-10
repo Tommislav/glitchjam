@@ -1,7 +1,7 @@
 #ifndef SOUND_SYSTEM_H
 #define SOUND_SYSTEM_H
 
-#include <unordered_map>
+//#include <unordered_map>
 #include <string>
 #include "Settings.h"
 #include "FireBulletComponent.h"
@@ -24,31 +24,31 @@ class SoundSystem : public artemis::EntityProcessingSystem
 		};
 
 		//artemis::ComponentMapper<PositionComponent> posMapper;
-		
-		unordered_map<string, SoundData*> soundMap;
-		
-		
+
+//		unordered_map<string, SoundData*> soundMap;
+
+
 		void createSound(string name, int minPlayTime = 1, float volume = 1.0f, bool loop = false) {
 			SoundData sd = SoundData();
-			soundMap.insert(std::make_pair<string, SoundData*>(name, &sd));
+			//soundMap.insert(std::make_pair<string, SoundData*>(name, &sd));
 		}
 
-		
-		
+
+
 		void setupSounds() {
 			createSound("Laser.wav", 100);
 			createSound("Explosion1.wav");
 
 
 		}
-		
+
 
 
 
 		void playSound(string id) {
-			SoundData* snd = soundMap[id];
+/*			SoundData* snd = soundMap[id];
 			if (snd != NULL) {
-				
+
 				if (!snd->isLoaded) {
 					snd->soundPlayer.loadSound(id);
 					snd->isLoaded = true;
@@ -57,7 +57,7 @@ class SoundSystem : public artemis::EntityProcessingSystem
 				// if enough time has passed since last time....
 
 				snd->soundPlayer.play();
-			}
+			}*/
 		}
 
 
@@ -68,13 +68,13 @@ class SoundSystem : public artemis::EntityProcessingSystem
 
 		virtual void begin() {
 			// Process all sounds in queue
-			std::cout << "PLAY A SOUND!!!" << std::endl;
+			//std::cout << "PLAY A SOUND!!!" << std::endl;
 		};
 
 
 	public:
 		SoundSystem() {
-			
+
 		}
 
 		virtual ~SoundSystem() {
@@ -82,7 +82,7 @@ class SoundSystem : public artemis::EntityProcessingSystem
 		}
 
 
-		
+
 
 
 

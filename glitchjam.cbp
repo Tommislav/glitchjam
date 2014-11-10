@@ -53,6 +53,7 @@
 		<Unit filename="include/SineOffsetComponent.h" />
 		<Unit filename="include/SpawnBulletsSystem.h" />
 		<Unit filename="include/SpawnFactory.h" />
+		<Unit filename="include/StarfieldRenderer.h" />
 		<Unit filename="include/SwarmComponent.h" />
 		<Unit filename="include/TurretComponent.h" />
 		<Unit filename="include/TurretSystem.h" />
@@ -165,6 +166,7 @@
 		<Unit filename="src/GameSystem.cpp" />
 		<Unit filename="src/MovePlayerSystem.cpp" />
 		<Unit filename="src/MoveSineOffsetSystem.cpp" />
+		<Unit filename="src/StarfieldRenderer.cpp" />
 		<Unit filename="src/main.cpp">
 			<Option virtualFolder="src/" />
 		</Unit>
@@ -174,6 +176,7 @@
 		<Unit filename="src/ofApp.h">
 			<Option virtualFolder="src/" />
 		</Unit>
+		<Unit filename="todo.txt" />
 		<Extensions>
 			<code_completion />
 			<envvars />
