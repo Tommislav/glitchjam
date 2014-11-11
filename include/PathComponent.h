@@ -6,12 +6,16 @@
 
 class PathComponent : public artemis::Component {
 	public:
+
 		std::vector<ofVec2f> points;
 		int currentIndex;
 		int endAction; // 0 = scatter, 1 = follow player
+		int id;
 
-		PathComponent(): currentIndex(0) {}
+		PathComponent(int id): currentIndex(0), id(id) {}
 		~PathComponent(){}
-};
 
+	private:
+		static int counter;
+};
 #endif // PATHCOMPONENT_H_INCLUDED

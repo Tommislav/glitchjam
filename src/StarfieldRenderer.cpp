@@ -5,7 +5,7 @@
 
 
 
-StarfieldRenderer::StarfieldRenderer(int color, float size, int num)
+StarfieldRenderer::StarfieldRenderer(int color, int num)
 {
 	_numStars = num;
 	_starSize = 4000000.0f;
@@ -49,7 +49,7 @@ void StarfieldRenderer::update() {
 };
 
 void StarfieldRenderer::randomizeStar(GlitchStar &star) {
-	float minValue = (ofRandom(1.0f) < 0.01) ? 30000.0f : 1200000.0f; 
+	float minValue = (ofRandom(1.0f) < 0.01) ? 30000.0f : 1200000.0f;
 
 	float z = 1.0f / (ofRandom(minValue, 2000000.0f));
 	star.z = z;

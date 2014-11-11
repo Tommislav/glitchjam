@@ -32,13 +32,12 @@
 #include "StarfieldRenderer.h"
 #include "SoundSystem.h"
 #include "Palette.h"
-
+#include "MotherPathRenderSystem.h"
 
 
 artemis::World _world;
 artemis::EntitySystem *_renderSystem = NULL;
 artemis::EntitySystem *_renderMothershipHints = NULL;
-
 StarfieldRenderer *_renderStarfield = NULL;
 
 int spawnCountdown = 100;
@@ -79,7 +78,8 @@ void ofApp::setup(){
 	sm->setSystem(new GameSystem(), true);
 	sm->setSystem(new SoundSystem(), true);
 
-	_renderStarfield = new StarfieldRenderer(STAR_COLOR, 2, 2000);
+	_renderStarfield = new StarfieldRenderer(STAR_COLOR, 200);
+	_renderMothershipHints = sm->setSystem(new MotherPathRenderSystem(*camera), false);
 	_renderSystem = sm->setSystem(new RenderRectanglesSystem(*camera), false);
 
     artemis::EntityManager *em = _world.getEntityManager();
@@ -157,6 +157,7 @@ void ofApp::draw(){
 	//ofRect(playerX, playerY, 10, 15);
 
 	_renderStarfield->update();
+	_renderMothershipHints->process();
 	_renderSystem->process();
 	ofDrawBitmapString(ofToString(ofGetFrameRate())+"fps", 10, 15);
 }

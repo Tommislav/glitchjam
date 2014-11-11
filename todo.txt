@@ -1,10 +1,10 @@
 
 ## Before procjam
-O Starfield (bg)
+X Starfield (bg)
+O Draw line where mothership is going to move
 O Take damage
 O Player dies
 O Remove entities outside of screen
-O Draw line where mothership is going to move
 
 ## Procjam
 O New way for spawn intelligence

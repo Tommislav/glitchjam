@@ -101,7 +101,7 @@ class SpawnFactory {
 			bool usePathOffset = false;
 			int pathOffset = -14;
 			std::vector<ofVec2f> swarmOffset;
-			PathComponent *path = new PathComponent();
+			PathComponent *path = new PathComponent(wave);
 			int timeToNext = 240;
 
 			int mothershipHp = 20;

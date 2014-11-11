@@ -16,7 +16,7 @@ struct GlitchStar {
 class StarfieldRenderer
 {
 	public:
-		StarfieldRenderer(int color, float size, int num);
+		StarfieldRenderer(int color, int num);
 		~StarfieldRenderer();
 		void update();
 

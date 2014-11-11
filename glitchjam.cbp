@@ -35,6 +35,7 @@
 		<Unit filename="include/GameDataComponent.h" />
 		<Unit filename="include/GameSystem.h" />
 		<Unit filename="include/InputControllableComponent.h" />
+		<Unit filename="include/MotherPathRenderSystem.h" />
 		<Unit filename="include/MothershipComponent.h" />
 		<Unit filename="include/MovePlayerSystem.h" />
 		<Unit filename="include/MoveSineOffsetSystem.h" />
@@ -51,6 +52,7 @@
 		<Unit filename="include/ShakeCameraSystem.h" />
 		<Unit filename="include/ShootableSystem.h" />
 		<Unit filename="include/SineOffsetComponent.h" />
+		<Unit filename="include/SoundSystem.h" />
 		<Unit filename="include/SpawnBulletsSystem.h" />
 		<Unit filename="include/SpawnFactory.h" />
 		<Unit filename="include/StarfieldRenderer.h" />
