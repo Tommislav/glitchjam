@@ -50,7 +50,8 @@ class MotherPathRenderSystem : public artemis::EntityProcessingSystem
 	protected:
 
 		virtual void begin() {
-
+			cameraX = camera->cameraX;
+			cameraY = camera->cameraY;
 		}
 
 
@@ -58,8 +59,7 @@ class MotherPathRenderSystem : public artemis::EntityProcessingSystem
 			MothershipComponent *mother = motherMapper.get(e);
 			PathComponent *path = pathMapper.get(e);
 
-			if (path == 0) { // invalid pointer... =/
-				std::cout << "INVALID POINTER TO PATH..." << std::endl;
+			if (mother == NULL || path == NULL) {
 				return;
 			}
 
@@ -77,10 +77,6 @@ class MotherPathRenderSystem : public artemis::EntityProcessingSystem
 				steps = (start < traceLength) ? start : traceLength;
 				end = start + steps;
 
-				/*
-				if (start < 20) { end+=2; }
-				else { end = start + 20; }
-				*/
 				if (end > max) end = max;
 				
 
@@ -93,6 +89,7 @@ class MotherPathRenderSystem : public artemis::EntityProcessingSystem
 
 			if (start == end == max) {
 				// Done! remove!
+
 			}
 
 			//PathComponent *path = e.getComponent<PathComponent>();
@@ -118,7 +115,7 @@ class MotherPathRenderSystem : public artemis::EntityProcessingSystem
 
 				ofVec2f last = path->points[i - 1];
 				ofVec2f curr = path->points[i];
-				ofLine(last.x, last.y, curr.x, curr.y);
+				ofLine(last.x - cameraX, last.y-cameraY, curr.x - cameraX, curr.y - cameraY);
 			}
 			
 

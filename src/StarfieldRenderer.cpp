@@ -27,7 +27,7 @@ StarfieldRenderer::~StarfieldRenderer()
 void StarfieldRenderer::update() {
 
 	float speedX = 0.0f;
-	float speedY = 1200000.0f;
+	float speedY = 4200000.0f;
 
 	ofSetHexColor(_color);
 	for (int i=0; i < _numStars; i++) {

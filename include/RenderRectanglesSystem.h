@@ -13,8 +13,6 @@ class RenderRectanglesSystem : public artemis::EntityProcessingSystem
 {
 	private:
 
-		int cameraX;
-		int cameraY;
 		std::vector<std::vector<RectangleComponent> > groupedByLayers;
 
 		artemis::ComponentMapper<RectangleComponent> rectangleMapper;
