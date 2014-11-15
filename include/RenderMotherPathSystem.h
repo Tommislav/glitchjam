@@ -80,7 +80,7 @@ class RenderMotherPathSystem : public artemis::EntityProcessingSystem
 
 			if (tail >= max) {
 				// Done! remove!
-				std::cout << "TAIL > MAX " << tail << ", " << max << std::endl;
+				//std::cout << "TAIL > MAX " << tail << ", " << max << std::endl;
 				return;
 			}
 
@@ -92,7 +92,7 @@ class RenderMotherPathSystem : public artemis::EntityProcessingSystem
 			ofSetHexColor(color);
 			ofSetLineWidth(2);
 
-			std::cout << "tail: " << tail << ", head: " << head << ", max: " << max << std::endl;
+			//std::cout << "tail: " << tail << ", head: " << head << ", max: " << max << std::endl;
 
 			for (int i = (tail + 1); i < head; i++) {
 				if (i < 1 || i > max) { continue; }

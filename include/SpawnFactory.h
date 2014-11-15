@@ -22,9 +22,7 @@ using std::vector;
 class SpawnFactory {
 
 	private:
-
-
-
+		
 		float generatePath(ofVec2f from, ofVec2f to, const float &speed, vector<ofVec2f> &popInto) {
 			float len = from.distance(to);
 			float steps = len / speed;
@@ -96,7 +94,11 @@ class SpawnFactory {
 
 		// Returns the wait-time until we should be called again for a new swarm
 		int createSwarm(artemis::World& world, int& wave) {
-			std::string swarmId = "wave_" + wave;
+
+			std::stringstream ss;
+			ss << "wave_" << wave;
+			std::string swarmId = ss.str();
+			std::cout << "mother with id: " << swarmId << std::endl;
 
 			bool usePathOffset = false;
 			int pathOffset = -14;

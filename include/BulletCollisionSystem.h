@@ -165,6 +165,7 @@ class BulletCollisionSystem : public artemis::EntityProcessingSystem
 			if (coll->hp <= 0) {
 				MothershipComponent *m = (MothershipComponent*)e.getComponent<MothershipComponent>();
 				if (m != NULL) {
+					// Send mother died EVENT!!!
 					notifySwarmOfMothersDeath(m->swarmId);
 					world->getGroupManager()->remove(e);
 				}
