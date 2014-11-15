@@ -100,8 +100,7 @@ class MotherPathRenderSystem : public artemis::EntityProcessingSystem
 			//ofVec2f vStart = path->points[start];
 			//ofVec2f vEnd = path->points[end];
 
-			std::cout << "start: " << start << ", end: " << end << ", max: " << max << std::endl;
-
+			
 			
 			int color = 0xff0000;
 			ofSetHexColor(color);
