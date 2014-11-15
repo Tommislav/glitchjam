@@ -2,9 +2,6 @@
 #include "ofApp.h"
 
 
-
-
-
 StarfieldRenderer::StarfieldRenderer(int color, int num)
 {
 	_numStars = num;

@@ -115,6 +115,7 @@
     <ClInclude Include="include\GameDataComponent.h" />
     <ClInclude Include="include\GameSystem.h" />
     <ClInclude Include="include\InputControllableComponent.h" />
+    <ClInclude Include="include\MotherPathRenderSystem.h" />
     <ClInclude Include="include\MothershipComponent.h" />
     <ClInclude Include="include\MovePlayerSystem.h" />
     <ClInclude Include="include\MoveSineOffsetSystem.h" />
