@@ -174,7 +174,9 @@
     <ClInclude Include="include\Palette.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="include\MotherPathRenderSystem.h">
+    <ClInclude Include="include\release\Settings.h" />
+    <ClInclude Include="include\soundsystem.h" />
+    <ClInclude Include="include\RenderMotherPathSystem.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

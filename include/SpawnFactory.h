@@ -142,7 +142,7 @@ class SpawnFactory {
 				swarmOffset.push_back(ofVec2f(200,100));
 
 			} else if (wave == 1) {
-				s1 = generatePath(ofVec2f(-20, 80), ofVec2f(800, 80), 3, path->points);
+				s1 = generatePath(ofVec2f(-380, 80), ofVec2f(800, 80), 3, path->points);
 				s2 = generatePath(ofVec2f(800,80), ofVec2f(800, 280), 3, path->points);
 				s3 = generatePath(ofVec2f(800, 280), ofVec2f(100, 280), 3, path->points);
 				s4 = generatePath(ofVec2f(100, 280), ofVec2f(100, 80), 3, path->points);
@@ -170,7 +170,7 @@ class SpawnFactory {
 				appendSinCurve(path->points, s1+s2, s1+s2+s3-1, 30, 3, true, false);
 				appendSinCurve(path->points, s1+s2+s3+s4, s1+s2+s3+s4+s5-1, 50, 6, true, false);
 				usePathOffset = true;
-				timeToNext = 100;//60*5;
+				timeToNext = 60*6;//60*5;
 
 				swarmOffset.push_back(ofVec2f(0,0));
 				swarmOffset.push_back(ofVec2f(0,0));
@@ -180,7 +180,7 @@ class SpawnFactory {
 				swarmOffset.push_back(ofVec2f(0,0));
 
 			} else if (wave == 3) { // <<----------
-				s1 = generatePath(ofVec2f(-20, 180), ofVec2f(600, 180), 2, path->points);
+				s1 = generatePath(ofVec2f(-380, 180), ofVec2f(600, 180), 2, path->points);
 				s2 = generatePath(ofVec2f(600,180), ofVec2f(600, 400), 2, path->points);
 				s3 = generatePath(ofVec2f(600, 400), ofVec2f(250, 400), 2, path->points);
 				s4 = generatePath(ofVec2f(250, 400), ofVec2f(250, 180), 2, path->points);
@@ -190,7 +190,7 @@ class SpawnFactory {
 				appendSinCurve(path->points, s1+s2+s3+s4, s1+s2+s3+s4+s5-1, 50, 6, true, false);
 				usePathOffset = true;
 				pathOffset = 28;
-				timeToNext = 60*5;
+				timeToNext = 60*9;
 
 				swarmOffset.push_back(ofVec2f(0,0));
 				swarmOffset.push_back(ofVec2f(0,0));
@@ -221,7 +221,7 @@ class SpawnFactory {
 				swarmOffset.push_back(ofVec2f(100,50));
 
 
-				timeToNext = (wave == 9) ? 4 * 50 : 100;
+				timeToNext = (wave == 9) ? 9 * 50 : 100;
 
 			} else if (wave == 10) {
 				s1 = generatePath(ofVec2f(500, -100), ofVec2f(500, 250), 4, path->points);

@@ -89,7 +89,7 @@ class BulletCollisionSystem : public artemis::EntityProcessingSystem
 				}
 			}
 
-			std::cout << "Mother died with id " << swarmId << ", numChildren " << bag->getCount() << std::endl;
+			//std::cout << "Mother died with id " << swarmId << ", numChildren " << bag->getCount() << std::endl;
 		}
 
 

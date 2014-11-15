@@ -115,7 +115,7 @@
     <ClInclude Include="include\GameDataComponent.h" />
     <ClInclude Include="include\GameSystem.h" />
     <ClInclude Include="include\InputControllableComponent.h" />
-    <ClInclude Include="include\MotherPathRenderSystem.h" />
+    <ClInclude Include="include\RenderMotherPathSystem.h" />
     <ClInclude Include="include\MothershipComponent.h" />
     <ClInclude Include="include\MovePlayerSystem.h" />
     <ClInclude Include="include\MoveSineOffsetSystem.h" />
@@ -127,12 +127,14 @@
     <ClInclude Include="include\PlayerComponent.h" />
     <ClInclude Include="include\PositionComponent.h" />
     <ClInclude Include="include\RectangleComponent.h" />
+    <ClInclude Include="include\release\Settings.h" />
     <ClInclude Include="include\RemoveEntitiesConditionSystem.h" />
     <ClInclude Include="include\RemoveEntityConditionComponent.h" />
     <ClInclude Include="include\RenderRectanglesSystem.h" />
     <ClInclude Include="include\ShakeCameraSystem.h" />
     <ClInclude Include="include\ShootableSystem.h" />
     <ClInclude Include="include\SineOffsetComponent.h" />
+    <ClInclude Include="include\soundsystem.h" />
     <ClInclude Include="include\SpawnBulletsSystem.h" />
     <ClInclude Include="include\SpawnFactory.h" />
     <ClInclude Include="include\StarfieldRenderer.h" />
